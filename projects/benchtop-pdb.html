@@ -1,0 +1,72 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Benchtop Power Distribution Board | Hazel Chen</title>
+<meta name="description" content="Switched, fused, and current-sensed 5 V, 3.3 V, and input rails for bench-testing custom PCBs.">
+<link rel="stylesheet" href="../style.css">
+</head>
+<body>
+<header class="topbar"><div class="wrap">
+  <a class="name" href="../index.html">Hazel Chen</a>
+  <nav>
+    <a href="../index.html#projects">Projects</a>
+    <a href="../resume.pdf">Resume</a>
+    <a href="mailto:znp3rx@virginia.edu">Email</a>
+    <a href="https://www.linkedin.com/in/hazelchens/">LinkedIn</a>
+    <a href="https://github.com/Hazel-H-Chen">GitHub</a>
+  </nav>
+</div></header>
+<main class="wrap">
+<a class="back" href="../index.html#projects">&larr; All projects</a>
+<div class="proj-head"><h1>Benchtop Power Distribution Board</h1></div>
+
+<p class="lede">A bench power board for bringing up and testing the team's custom PCBs: individually switched and fused outputs, regulated 5&nbsp;V and 3.3&nbsp;V rails, and built-in current sensing, all on tool-free WAGO terminals.</p>
+<dl class="titleblock"><div><dt>Designers</dt><dd>Hazel Chen, Claudia Van Dyke</dd></div><div><dt>For</dt><dd>Virginia Motorsports</dd></div><div><dt>Tools</dt><dd>Altium Designer</dd></div><div><dt>Input</dt><dd>12 to 36 V, 5 A max</dd></div><div><dt>Status</dt><dd>Built and assembled (V1.1)</dd></div></dl>
+<figure class="fig-hero"><img src="../img/pdb_assembled.jpg" alt="Fully assembled V1.1 board" loading="lazy"><figcaption>Fully assembled V1.1 board</figcaption></figure>
+
+<div class="prose">
+<h2>Why build it</h2>
+<p>Testing a new PCB usually means a tangle of clip leads off a bench supply. This board gives every output its own fuse and switch, and uses WAGO board-to-wire quick-connect terminals, so plugging in a board under test takes seconds and a short on one output doesn't take down the others.</p>
+</div>
+<table class=""><tbody><tr><th scope="row">Input voltage</th><td>12 to 36 V, 5 A max</td></tr><tr><th scope="row">Input protection</th><td>TVS diode, P-channel MOSFET reverse-polarity protection, 5 A fuse</td></tr><tr><th scope="row">5 V output</th><td>5 V, 1 A max</td></tr><tr><th scope="row">3.3 V output</th><td>3.3 V, 0.5 A max</td></tr><tr><th scope="row">Current measurement</th><td>Shunt resistor with amplifier, plus external ammeter support</td></tr></tbody></table>
+
+<div class="section-split">
+<div class="prose">
+<h2>Power protection</h2>
+<p>Each output channel has its own fuse, and a 5&nbsp;A fuse protects the main input. Reverse-polarity protection uses a P-channel MOSFET (NTTFS5116PLTWG) instead of a series diode, which avoids the diode's forward voltage drop. A TVS diode clamping at 40&nbsp;V protects connected hardware from input spikes.</p>
+</div>
+<figure class=""><img src="../img/pdb_input_protection.jpg" alt="Input protection layout" loading="lazy"><figcaption>Input protection layout</figcaption></figure>
+</div>
+
+<div class="section-split">
+<div class="prose">
+<h2>Voltage conversion</h2>
+<p>A TI LMR60420-Q1 buck converter steps the 12 to 36&nbsp;V input down to 5&nbsp;V, and an AP2112K LDO then derives 3.3&nbsp;V from the 5&nbsp;V rail. The two-stage approach trades a little efficiency for a quieter 3.3&nbsp;V output. The 5&nbsp;V rail also powers two relays that switch the VCC and 5&nbsp;V outputs independently, so one channel can be toggled without interrupting the rest.</p>
+</div>
+<figure class=""><img src="../img/pdb_buck_layout.jpg" alt="LMR60420 buck converter layout" loading="lazy"><figcaption>LMR60420 buck converter layout</figcaption></figure>
+</div>
+
+<div class="section-split">
+<div class="prose">
+<h2>Current sensing</h2>
+<p>Two outputs support current measurement. The Vsens output runs through an on-board shunt resistor and amplifier that connect to a Digilent Analog Discovery 2 for logging. The VEXT output breaks out to an external ammeter for quick checks.</p>
+</div>
+<figure class=""><img src="../img/pdb_shunt_layout.jpg" alt="Shunt resistor and amplifier layout" loading="lazy"><figcaption>Shunt resistor and amplifier layout</figcaption></figure>
+</div>
+
+<div class="prose">
+<h2>Assembly</h2>
+<p>PCBs and a solder paste stencil were fabricated by JLCPCB. I applied paste with the stencil, placed SMT parts by hand, reflowed the boards in a reflow oven, then inspected and reworked as needed. Through-hole parts were hand-soldered last.</p>
+</div>
+<div class="fig-row">
+<figure class=""><img src="../img/pdb_layout.jpg" alt="Full PCB layout in Altium Designer" loading="lazy"><figcaption>Full PCB layout in Altium Designer</figcaption></figure>
+<figure class=""><img src="../img/pdb_pcbs_photo.jpg" alt="Bare V1.1 PCBs" loading="lazy"><figcaption>Bare V1.1 PCBs</figcaption></figure>
+</div>
+
+<nav class="next"><a href="../index.html#projects">All projects</a><a href="battery-thermal-model.html">Next: Tractive Battery Thermal Model</a></nav>
+</main>
+<footer><div class="wrap">Hazel Chen &middot; University of Virginia &middot; <a href="mailto:znp3rx@virginia.edu">znp3rx@virginia.edu</a></div></footer>
+</body>
+</html>

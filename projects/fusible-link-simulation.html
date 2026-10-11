@@ -1,0 +1,60 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Fusible Link Simulation | Hazel Chen</title>
+<meta name="description" content="Coupled electro-thermal Ansys model of nickel-strip fusible links for a cylindrical-cell pack.">
+<link rel="stylesheet" href="../style.css">
+</head>
+<body>
+<header class="topbar"><div class="wrap">
+  <a class="name" href="../index.html">Hazel Chen</a>
+  <nav>
+    <a href="../index.html#projects">Projects</a>
+    <a href="../resume.pdf">Resume</a>
+    <a href="mailto:znp3rx@virginia.edu">Email</a>
+    <a href="https://www.linkedin.com/in/hazelchens/">LinkedIn</a>
+    <a href="https://github.com/Hazel-H-Chen">GitHub</a>
+  </nav>
+</div></header>
+<main class="wrap">
+<a class="back" href="../index.html#projects">&larr; All projects</a>
+<div class="proj-head"><h1>Fusible Link Simulation</h1></div>
+
+<p class="lede">An Ansys model to find which nickel strip geometry fuses reliably at a target fault current, so the strips connecting cells in a cylindrical-cell pack can double as fusible links.</p>
+<dl class="titleblock"><div><dt>Role</dt><dd>Full design and implementation (individual project)</dd></div><div><dt>Tools</dt><dd>Ansys Mechanical, Ansys Workbench</dd></div><div><dt>Analysis</dt><dd>Coupled electro-thermal transient</dd></div><div><dt>Status</dt><dd>Simulation complete</dd></div></dl>
+<figure class="fig-hero"><img src="../img/fuse_pack_render.jpg" alt="Fusible link layout in a custom cylindrical-cell pack" loading="lazy"><figcaption>Fusible link layout in a custom cylindrical-cell pack</figcaption></figure>
+
+<div class="prose">
+<h2>The problem</h2>
+<p>Fuses in a battery pack isolate faulty cells and stop dangerous current surges. In cylindrical-cell packs, the spot-welded nickel strips that connect cells often act as fusible links too. Their geometry has to be tuned so they fuse at the target fault current without failing during normal operation.</p>
+
+<h2>Approach</h2>
+<p>I used a coupled transient analysis in Ansys Mechanical, pairing an electric analysis for Joule heat generation with a thermal analysis for temperature rise. Nickel's resistivity is defined as a temperature-dependent curve. At each time step the solver computes Joule heating from the strip's current resistance, updates the temperature, then reads the new resistance off the curve before the next step.</p>
+<p>That two-way coupling matters. Nickel's resistivity climbs with temperature, so as the strip heats it generates more heat per amp, which accelerates the run toward the fusing point. Iterating over the full simulation period captures the strip's complete temperature-versus-time response, including that feedback near failure.</p>
+</div>
+
+<div class="fig-row">
+<figure class=""><img src="../img/fuse_ansys_contour.jpg" alt="Temperature at 10.5 s under a 50 A fault current" loading="lazy"><figcaption>Temperature at 10.5 s under a 50 A fault current</figcaption></figure>
+<figure class=""><img src="../img/fuse_temp_plot.jpg" alt="Probe temperature over time at 50 A" loading="lazy"><figcaption>Probe temperature over time at 50 A</figcaption></figure>
+</div>
+
+<div class="prose">
+<h2>Results</h2>
+<p>At a 50&nbsp;A fault current, the neck of the link reaches 1560&nbsp;&deg;C by 10.5&nbsp;s, past nickel's melting point of about 1455&nbsp;&deg;C. The temperature curve steepens as it climbs, which is the resistivity feedback described above.</p>
+
+<h2>Next steps</h2>
+<p>The current model treats the strip in isolation, which makes it a conservative baseline. Planned extensions:</p>
+<ul>
+<li>Model conduction into the connected cells, which act as heat sinks and would raise the true fusing current.</li>
+<li>Simulate dynamic current profiles instead of a fixed current, to reflect real fault and load conditions.</li>
+<li>Model more complex strip geometries beyond the simplified shapes used here.</li>
+</ul>
+</div>
+
+<nav class="next"><a href="../index.html#projects">All projects</a><a href="pocketsens.html">Next: PocketSens Portable Sensor Suite</a></nav>
+</main>
+<footer><div class="wrap">Hazel Chen &middot; University of Virginia &middot; <a href="mailto:znp3rx@virginia.edu">znp3rx@virginia.edu</a></div></footer>
+</body>
+</html>

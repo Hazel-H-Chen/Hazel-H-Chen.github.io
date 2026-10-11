@@ -1,0 +1,57 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Future Frame LightCore | Hazel Chen</title>
+<meta name="description" content="Five-channel RGB, white, and IR light source for film scanning, with its own enclosure and thermal design.">
+<link rel="stylesheet" href="../style.css">
+</head>
+<body>
+<header class="topbar"><div class="wrap">
+  <a class="name" href="../index.html">Hazel Chen</a>
+  <nav>
+    <a href="../index.html#projects">Projects</a>
+    <a href="../resume.pdf">Resume</a>
+    <a href="mailto:znp3rx@virginia.edu">Email</a>
+    <a href="https://www.linkedin.com/in/hazelchens/">LinkedIn</a>
+    <a href="https://github.com/Hazel-H-Chen">GitHub</a>
+  </nav>
+</div></header>
+<main class="wrap">
+<a class="back" href="../index.html#projects">&larr; All projects</a>
+<div class="proj-head"><h1>Future Frame LightCore</h1></div>
+
+<p class="lede">A precise light source for scanning photographic film. Five independent channels (red, green, blue, white, and infrared) give accurate color, even illumination, and IR for dust detection, all inside a custom housing.</p>
+<dl class="titleblock"><div><dt>Role</dt><dd>Full design and implementation (individual project)</dd></div><div><dt>Tools</dt><dd>KiCad, Autodesk Fusion, CircuitPython</dd></div><div><dt>Controller</dt><dd>Seeed XIAO RP2040</dd></div><div><dt>Status</dt><dd>V1.21 PCB, V1.2 housing</dd></div></dl>
+<figure class="fig-hero"><img src="../img/lightcore_assembled.jpg" alt="Assembled V1.2 LightCore" loading="lazy"><figcaption>Assembled V1.2 LightCore</figcaption></figure>
+
+<div class="section-split">
+<div class="prose">
+<h2>Electronics</h2>
+<p>A Seeed XIAO RP2040 controls the LightCore on a custom PCB. Power steps down in two stages: an AP64060 buck converter takes 36&nbsp;V to 5&nbsp;V, then an AP7375 LDO makes 3.3&nbsp;V. Four AL8860WT LED drivers with a four-channel DAC give precise current control of the RGBW channels, while a MOSFET drives the infrared channel. A TMP302 temperature switch cuts the output at 80&nbsp;&deg;C.</p>
+</div>
+<figure class=""><img src="../img/lightcore_layout.jpg" alt="V1.21 PCB layout" loading="lazy"><figcaption>V1.21 PCB layout</figcaption></figure>
+</div>
+<table class=""><tbody><tr><th scope="row">Input voltage</th><td>36 V nominal</td></tr><tr><th scope="row">Voltage conversion</th><td>AP64060 buck (36 V to 5 V), AP7375 LDO (5 V to 3.3 V)</td></tr><tr><th scope="row">Control</th><td>Seeed XIAO RP2040</td></tr><tr><th scope="row">LED control</th><td>4&times; AL8860WT, DAC-controlled DC dimming</td></tr><tr><th scope="row">Overtemperature protection</th><td>TMP302BDRLR, cutoff at 80 &deg;C</td></tr><tr><th scope="row">User controls</th><td>0.96" OLED display, rotary encoder, mechanical switches</td></tr><tr><th scope="row">LEDs</th><td>3&times; RGB, white, and infrared</td></tr></tbody></table>
+
+<div class="section-split">
+<div class="prose">
+<h2>Mechanical design</h2>
+<p>The housing combines a 3D-printed body with sheet aluminum side walls for rigidity. A waterjet-cut aluminum heat spreader mounted to the PCB handles thermal management, and a two-stage diffuser gives even backlighting.</p>
+<p>A second controller PCB inside the housing carries a rotary encoder, four switches, and an OLED display for direct control of the light panel.</p>
+</div>
+<figure class=""><img src="../img/lightcore_cad.jpg" alt="V1.2 CAD design" loading="lazy"><figcaption>V1.2 CAD design</figcaption></figure>
+</div>
+<figure class=""><img src="../img/lightcore_pcb_photo.jpg" alt="V1.21 prototype PCB" loading="lazy"><figcaption>V1.21 prototype PCB</figcaption></figure>
+
+<div class="prose">
+<h2>Takeaways</h2>
+<p>This project strengthened my PCB design, SMT soldering, and enclosure design. I learned to turn circuit requirements into a working board layout, troubleshoot components during assembly, and design mechanical parts that fit and support the electronics. Most of all, it showed me how much the hardware and mechanical sides of a product shape each other.</p>
+</div>
+
+<nav class="next"><a href="../index.html#projects">All projects</a><a href="hybrid-viewfinder.html">Next: Future Frame Hybrid Viewfinder</a></nav>
+</main>
+<footer><div class="wrap">Hazel Chen &middot; University of Virginia &middot; <a href="mailto:znp3rx@virginia.edu">znp3rx@virginia.edu</a></div></footer>
+</body>
+</html>

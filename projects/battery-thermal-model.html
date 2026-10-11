@@ -1,0 +1,53 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Tractive Battery Thermal Model | Hazel Chen</title>
+<meta name="description" content="MATLAB model predicting cell temperature and state of charge over a full FSAE endurance run.">
+<link rel="stylesheet" href="../style.css">
+</head>
+<body>
+<header class="topbar"><div class="wrap">
+  <a class="name" href="../index.html">Hazel Chen</a>
+  <nav>
+    <a href="../index.html#projects">Projects</a>
+    <a href="../resume.pdf">Resume</a>
+    <a href="mailto:znp3rx@virginia.edu">Email</a>
+    <a href="https://www.linkedin.com/in/hazelchens/">LinkedIn</a>
+    <a href="https://github.com/Hazel-H-Chen">GitHub</a>
+  </nav>
+</div></header>
+<main class="wrap">
+<a class="back" href="../index.html#projects">&larr; All projects</a>
+<div class="proj-head"><h1>Tractive Battery Thermal Model</h1></div>
+
+<p class="lede">A MATLAB model that predicts cell temperature and state of charge across a full FSAE endurance run, to judge whether a Molicel P60C pack needs active cooling before a single cell is bought.</p>
+<dl class="titleblock"><div><dt>Tools</dt><dd>MATLAB</dd></div><div><dt>Cell</dt><dd>Molicel P60C</dd></div><div><dt>Pack</dt><dd>140S3P (theoretical)</dd></div><div><dt>Inputs</dt><dd>LapSim power trace, published DCIR data</dd></div><div><dt>Status</dt><dd>Model built, awaiting bench calibration</dd></div></dl>
+<figure class="fig-hero"><img src="../img/thermal_temp_plot.jpg" alt="Single-cell temperature over a 20-minute endurance run" loading="lazy"><figcaption>Single-cell temperature over a 20-minute endurance run</figcaption></figure>
+
+<div class="prose">
+<h2>Approach</h2>
+<p>The model solves a coupled two-state system: cell temperature and state of charge. Per-cell current comes from a real LapSim power trace divided across the 140S3P pack. Internal resistance (DCIR) is looked up as a function of state of charge from Molicel's published P60C data, so resistance rises realistically as the pack drains.</p>
+<p class="eq">Q<sub>gen</sub> = I<sup>2</sup> R(SOC) &nbsp;&nbsp; Q<sub>loss</sub> = hA (T &minus; T<sub>amb</sub>) &nbsp;&nbsp; dSOC/dt = &minus;I / Q<sub>cell</sub></p>
+<p>Heat generation is ohmic. Heat rejection is lumped convection to ambient, where <i>hA</i> is the calibration parameter to be fitted against bench data. State of charge comes from coulomb counting and feeds back into the DCIR lookup, closing the loop. The endurance run is built by repeating the LapSim lap profile for all 20 laps.</p>
+
+<h2>Results</h2>
+<p>For the assumed conditions, cell temperature rises from about 30&nbsp;&deg;C to about 36&nbsp;&deg;C over the 20-minute run. The steepest climb comes in the first five minutes. State of charge falls almost linearly over the same run.</p>
+</div>
+<div class="fig-row">
+<figure class=""><img src="../img/thermal_soc_plot.jpg" alt="State of charge over the endurance run" loading="lazy"><figcaption>State of charge over the endurance run</figcaption></figure>
+<figure class=""><img src="../img/thermal_dcir_plot.jpg" alt="DCIR vs. state of charge for the Molicel P60C, from Molicel's published data" loading="lazy"><figcaption>DCIR vs. state of charge for the Molicel P60C, from Molicel's published data</figcaption></figure>
+</div>
+
+<div class="prose">
+<h2>Limitations</h2>
+<p>The model is deliberately simple. Each cell is a single lumped thermal mass. Heat generation is ohmic only, ignoring entropic heat. Current is derived from power at a fixed nominal voltage, ignoring voltage sag. DCIR depends on state of charge but not temperature, and the convection term and material properties are typical Li-ion values, not measurements.</p>
+<p>Its strength is how little it needs. From a DCIR curve alone it produces useful predictions before a physical cell exists, which makes it a practical screening tool for comparing candidate cells before any bench testing. The next step is measuring DCIR and temperature rise on a real cell to calibrate <i>hA</i> and validate the model.</p>
+</div>
+
+<nav class="next"><a href="../index.html#projects">All projects</a><a href="fusible-link-simulation.html">Next: Fusible Link Simulation</a></nav>
+</main>
+<footer><div class="wrap">Hazel Chen &middot; University of Virginia &middot; <a href="mailto:znp3rx@virginia.edu">znp3rx@virginia.edu</a></div></footer>
+</body>
+</html>

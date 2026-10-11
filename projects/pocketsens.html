@@ -1,0 +1,42 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>PocketSens Portable Sensor Suite | Hazel Chen</title>
+<meta name="description" content="Handheld board measuring pressure, gas, humidity, IR temperature, and lightning, on a SAMD21 with LiPo charging.">
+<link rel="stylesheet" href="../style.css">
+</head>
+<body>
+<header class="topbar"><div class="wrap">
+  <a class="name" href="../index.html">Hazel Chen</a>
+  <nav>
+    <a href="../index.html#projects">Projects</a>
+    <a href="../resume.pdf">Resume</a>
+    <a href="mailto:znp3rx@virginia.edu">Email</a>
+    <a href="https://www.linkedin.com/in/hazelchens/">LinkedIn</a>
+    <a href="https://github.com/Hazel-H-Chen">GitHub</a>
+  </nav>
+</div></header>
+<main class="wrap">
+<a class="back" href="../index.html#projects">&larr; All projects</a>
+<div class="proj-head"><h1>PocketSens Portable Sensor Suite</h1></div>
+
+<p class="lede">A pocket-sized device that measures environmental and physical data a smartphone can't: pressure, altitude, temperature, humidity, gas, non-contact temperature, and lightning strikes up to 40&nbsp;km away.</p>
+<dl class="titleblock"><div><dt>Role</dt><dd>Designer (individual project)</dd></div><div><dt>Tools</dt><dd>KiCad, Arduino IDE, J-Link EDU Mini</dd></div><div><dt>MCU</dt><dd>SAMD21E18 (Arm Cortex-M0+)</dd></div><div><dt>Status</dt><dd>Rev 1.0 prototype, August 2025</dd></div></dl>
+<figure class="fig-hero"><img src="../img/pocketsens_pcb_photo.jpg" alt="Rev 1.0 prototype PCBs" loading="lazy"><figcaption>Rev 1.0 prototype PCBs</figcaption></figure>
+<table class=""><tbody><tr><th scope="row">MCU</th><td>Arm Cortex-M0+ SAMD21E18</td></tr><tr><th scope="row">Power and supply</th><td>Single lithium-polymer cell, MCP73831 charge IC, USB-C input</td></tr><tr><th scope="row">Gas and humidity</th><td>BME680: gas (MOX), humidity &plusmn;3% RH, pressure &plusmn;1 hPa, temperature &plusmn;1 &deg;C, I<sup>2</sup>C</td></tr><tr><th scope="row">Lightning detection</th><td>Up to 40 km, I<sup>2</sup>C, programmable filtering</td></tr><tr><th scope="row">Infrared</th><td>TSOP6238 receiver, 0.4 W transmitter, MLX90614 non-contact thermometer</td></tr><tr><th scope="row">Altimeter</th><td>BMP390 barometric pressure and altimeter, &plusmn;0.25 m</td></tr></tbody></table>
+<div class="section-split">
+<div class="prose">
+<h2>Build</h2>
+<p>PCBs and a solder paste stencil were fabricated by JLCPCB. I applied paste with the stencil, placed SMT parts, reflowed the boards, then inspected and reworked as needed. Through-hole parts and some SMT parts were hand-soldered.</p>
+<p>I flashed the bootloader with a J-Link EDU Mini, after which the board takes code straight from the Arduino IDE.</p>
+</div>
+<figure class=""><img src="../img/pocketsens_layout.jpg" alt="PCB layout in KiCad" loading="lazy"><figcaption>PCB layout in KiCad</figcaption></figure>
+</div>
+
+<nav class="next"><a href="../index.html#projects">All projects</a><a href="lightcore.html">Next: Future Frame LightCore</a></nav>
+</main>
+<footer><div class="wrap">Hazel Chen &middot; University of Virginia &middot; <a href="mailto:znp3rx@virginia.edu">znp3rx@virginia.edu</a></div></footer>
+</body>
+</html>
