@@ -20,7 +20,7 @@
   --hv-text: #b8440a;   /* darker orange that passes contrast for text */
   --tile: #1f2d3a;
   --maxw: 1040px;
-  --textw: 42rem;
+  --textw: 52rem;
 }
 @media (prefers-color-scheme: dark) {
   :root {
