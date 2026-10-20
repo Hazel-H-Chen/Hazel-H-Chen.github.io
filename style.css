@@ -62,7 +62,6 @@ h1, h2, h3 {
 h2 { font-size: 1.9rem; margin: 3rem 0 0.75rem; }
 h3 { font-size: 1.35rem; margin: 1.75rem 0 0.4rem; }
 p { margin: 0 0 1rem; }
-.prose { max-width: var(--textw); }
 .prose ul { padding-left: 1.2rem; margin: 0 0 1rem; }
 .prose li { margin-bottom: 0.35rem; }
 
@@ -127,8 +126,8 @@ p { margin: 0 0 1rem; }
 /* ---------- project page ---------- */
 .back { display: inline-block; margin: 28px 0 0; font-size: 0.95rem; color: var(--muted); }
 .proj-head { padding: 20px 0 8px; }
-.proj-head h1 { font-size: clamp(2.4rem, 6vw, 3.8rem); max-width: 22ch; }
-.lede { font-size: 1.25rem; line-height: 1.45; max-width: 38rem; margin: 16px 0 0; }
+.proj-head h1 { font-size: clamp(2.4rem, 6vw, 3.8rem); }
+.lede { font-size: 1.25rem; line-height: 1.45; margin: 16px 0 0; }
 
 /* the drawing title block: the one bold structural element */
 .titleblock {
@@ -142,7 +141,8 @@ p { margin: 0 0 1rem; }
 figure { margin: 1.5rem 0; }
 figure img { border: 1px solid var(--rule); background: var(--surface); }
 figcaption { font-size: 0.9rem; color: var(--muted); margin-top: 6px; }
-.fig-hero img { width: auto; max-width: 100%; max-height: 560px; }
+.fig-hero img { width: auto; max-width: 100%; max-height: 560px; margin-left: auto; margin-right: auto; }
+.fig-hero figcaption { text-align: center; }
 .fig-row { display: grid; grid-template-columns: repeat(auto-fit, minmax(260px, 1fr)); gap: 20px; align-items: start; }
 .fig-row figure { margin: 0; }
 .section-split { display: grid; grid-template-columns: minmax(0, 1fr) minmax(0, 0.9fr); gap: 36px; align-items: start; }
