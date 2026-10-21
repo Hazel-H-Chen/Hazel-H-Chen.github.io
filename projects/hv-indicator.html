@@ -1,0 +1,51 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>High Voltage Indicator Light | Hazel Chen</title>
+<meta name="description" content="A tractive-powered, isolated supply that drives a low-voltage panel-mount indicator whenever the FSAE EV tractive system is energized.">
+<link rel="stylesheet" href="../style.css">
+</head>
+<body>
+<header class="topbar"><div class="wrap">
+  <a class="name" href="../index.html">Hazel Chen</a>
+  <nav>
+    <a href="../index.html#projects">Projects</a>
+    <a href="../resume.pdf">Resume</a>
+    <a href="mailto:znp3rx@virginia.edu">Email</a>
+    <a href="https://www.linkedin.com/in/hazelchens/">LinkedIn</a>
+    <a href="https://github.com/Hazel-H-Chen">GitHub</a>
+  </nav>
+</div></header>
+<main class="wrap">
+<a class="back" href="../index.html#projects">&larr; All projects</a>
+<div class="proj-head"><h1>High Voltage Indicator Light</h1></div>
+
+<p class="lede">FSAE rules require an indicator that lights whenever the tractive system is above a set voltage. I designed a board that powers itself from the tractive bus and outputs an isolated 12&nbsp;V, so a standard low-voltage panel-mount light can be mounted anywhere on the tractive battery.</p>
+<dl class="titleblock"><div><dt>Tools</dt><dd>Altium Designer</dd></div><div><dt>Key parts</dt><dd>STMicroelectronics VIPer06, TI LM25180</dd></div><div><dt>Isolated output</dt><dd>12 V from a 10&ndash;30 V intermediate rail</dd></div><div><dt>Team</dt><dd>Virginia Motorsports (UVA Formula SAE EV)</dd></div></dl>
+<figure class="fig-hero"><div class="ph">Photo placeholder: assembled board with the panel-mount light lit</div><figcaption>Assembled indicator board</figcaption></figure>
+
+<div class="prose">
+<h2>Why not just an LED?</h2>
+<p>The simplest indicator is an LED with a diode and series resistor across the bus. The problem is that the resistor has to be sized for the full pack voltage, so at the minimum voltage where the rules say the light must turn on, only a small current flows and the LED is very dim. Instead of trading brightness at one end against dissipation at the other, I used a switching supply that delivers the same output regardless of pack voltage.</p>
+
+<h2>Design</h2>
+<p>The board has two stages:</p>
+<ul>
+<li><b>VIPer06 buck converter.</b> The STMicroelectronics VIPer06 is a high-voltage converter that runs directly off the tractive bus and steps it down to a low-voltage rail. This stage is based on <a href="https://github.com/Rootthecause/HVI">Rootthecause's open-source HVI design</a>.</li>
+<li><b>Isolated flyback.</b> A TI LM25180 flyback converter takes that 10&ndash;30&nbsp;V rail and produces an isolated 12&nbsp;V output for the light. Because the output is isolated from the tractive system, the light and its wiring are ordinary low-voltage parts.</li>
+</ul>
+</div>
+<figure class="fig-hero"><div class="ph">Photo placeholder: Altium layout of the current revision</div><figcaption>Current revision in Altium</figcaption></figure>
+
+<div class="prose">
+<h2>Replacing the isolated module</h2>
+<p>The first revision used an off-the-shelf Murata isolated DC-DC module for the isolation stage. In testing, the module kept triggering the VIPer06's protection shutdown, so the indicator wouldn't stay on reliably. I replaced it with my own flyback built around the LM25180. Designing the stage myself gave me control over its startup and load behavior, so it works properly with the VIPer06 ahead of it.</p>
+</div>
+
+<nav class="next"><a href="../index.html#projects">All projects</a><a href="hvc.html">Next: High Voltage Controller</a></nav>
+</main>
+<footer><div class="wrap">Hazel Chen &middot; University of Virginia &middot; <a href="mailto:znp3rx@virginia.edu">znp3rx@virginia.edu</a></div></footer>
+</body>
+</html>

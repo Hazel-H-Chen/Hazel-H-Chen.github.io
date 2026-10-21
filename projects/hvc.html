@@ -23,39 +23,40 @@
 <div class="proj-head"><h1>High Voltage Controller (HVC)</h1></div>
 
 <p class="lede">A single PCB that handles everything between the FSAE car's tractive battery and the rest of the vehicle: precharge, contactor control, communication with the cell monitors, and the safety latches the rules require.</p>
-<dl class="titleblock"><div><dt>Role</dt><dd>Lead designer</dd></div><div><dt>Team</dt><dd>Virginia Motorsports FSAE</dd></div><div><dt>Tools</dt><dd>Altium Designer</dd></div><div><dt>Pack voltage</dt><dd>528 V max</dd></div><div><dt>Status</dt><dd>Prototype</dd></div></dl>
+<dl class="titleblock"><div><dt>Role</dt><dd>Lead designer</dd></div><div><dt>Team</dt><dd>Virginia Motorsports FSAE</dd></div><div><dt>Tools</dt><dd>Altium Designer</dd></div><div><dt>Pack voltage</dt><dd>556 V max</dd></div><div><dt>Status</dt><dd>Prototype</dd></div></dl>
 <!-- ADD IMAGES HERE: e.g. <figure class="fig-hero"><img src="../img/hvc_render.png" alt="3D render of the HVC board in Altium" loading="lazy"><figcaption>3D render of the HVC board in Altium</figcaption></figure> -->
 
 <div class="prose">
 <h2>Why a new board</h2>
-<p>The team's previous HVC was modular, with a separate board for each function. It worked, but it was bulky and needed more wiring and connectors than the job called for. This season the pack also goes from 400 V to a 528 V maximum, so the high-voltage side needed rework anyway.</p>
+<p>The team's previous HVC was modular, with a separate board for each function. It worked, but it was bulky and needed more wiring and connectors than necessary. This season the pack also goes from 400 V to a 556 V maximum, so much of the high-voltage circuitry needed redesigning.</p>
 <p>The new design pulls every tractive-battery function onto one board around a Teensy 4.1, which reports to the rest of the car over CAN.</p>
 
 <h2>Requirements</h2>
 <ul>
-<li>Operate at up to 528 V pack voltage, up from 400 V last year.</li>
+<li>Operate at up to 556 V pack voltage, up from 400 V last year.</li>
 <li>Precharge the motor controller safely, and survive repeated back-to-back precharge cycles during technical inspection.</li>
 <li>Monitor precharge and close the main positive contactor only once it is complete.</li>
 <li>Drive both main contactors and read back their auxiliary contacts to detect a welded contactor.</li>
 <li>Carry the shutdown circuit and hold IMD and BMS faults latched until a manual reset.</li>
-<li>Talk to the cell-monitoring boards over isoSPI and to the car over CAN.</li>
+<li>Communicate with and control the segment cell-monitoring boards over isoSPI.</li>
+<li>Communicate to the rest of the car over CAN and output fault signals.</li>
 </ul>
 </div>
 
 <h2>How it works</h2>
 <div class="blocks">
 <section><h3>Control and CAN</h3>
-<p>A Teensy 4.1 runs the board. It's fast, easy to bring up, and works with the PlatformIO workflow the team already uses. A TCAN3414 transceiver with ESD2CANFD24 protection connects it to the car's CAN bus.</p></section>
+<p>A Teensy 4.1 runs the board. The Teensy is our main microcontroller for all boards. The 4.1 was chosen becuase of its dual SPI ability, which allows us to implement loop topology for isoSPI. A TCAN3414 transceiver connects it to the car's CAN bus.</p></section>
 <section><h3>isoSPI to the cell monitors</h3>
-<p>An ADBMS6822 dual isoSPI transceiver with two pulse transformers gives the Teensy two independent isoSPI ports. With one port at each end of the cell-monitor daisy chain, the chain becomes a ring. If one cable or board in the chain fails, the HVC can still reach every other board from the opposite end. Analog Devices calls this reversible isoSPI.</p></section>
+<p>An ADBMS6822 dual isoSPI transceiver with two transformers gives the Teensy two independent isoSPI ports. With one port at each end of the cell-monitor daisy chain, the chain becomes a ring. If one cable or board in the chain fails, the HVC can still reach every other board from the opposite end. Analog Devices calls this reversible isoSPI.</p></section>
 <section><h3>Precharge</h3>
-<p>A precharge relay switches a bank of three 3&nbsp;k&Omega; TO-247 power resistors in parallel (1&nbsp;k&Omega; total). Splitting the resistance across three packages spreads the heat, so the bank survives repeated precharges at inspection.</p></section>
+<p>A precharge contactor switches three 300&Omega; TO-247 power resistors in parallel (100&Omega; total). The Teensy 4.1 controls a fan that cools these resistors, allowing them to survive repeat precharges during inspection.</p></section>
 <section><h3>Precharge monitoring</h3>
-<p>An AMC0381D06-Q1 isolated amplifier, which has the high-voltage divider built in and a 600&nbsp;V input range, feeds the Teensy so firmware can watch precharge progress. A separate LM2903 comparator checks the voltage across the precharge circuit against a trimmed reference. Only when that check passes does a photorelay enable the main positive contactor driver, so closing the contactor doesn't depend on firmware alone.</p></section>
+<p>An AMC0381D06-Q1 isolated amplifier, which has the high-voltage divider built in and a 600&nbsp;V input range, feeds the Teensy so firmware can watch precharge progress. A separate LM2903 comparator checks the voltage across the precharge circuit against a reference voltage and closes the main positive contactor only when the voltage reaches the desired level.</p></section>
 <section><h3>Contactor control</h3>
 <p>A TPS1H200A-Q1 smart high-side switch drives the main positive contactor coil from the shutdown circuit. The contactors' auxiliary contacts are read back through a photorelay, so the MCU can see whether each contactor actually opened or closed and flag a weld.</p></section>
 <section><h3>Discharge</h3>
-<p>An IXTH6N100D2 1000&nbsp;V depletion-mode MOSFET is normally on. A TPSI3052-Q1 isolated switch driver, powered from the shutdown circuit, holds it off while the car is live. When the shutdown circuit opens, the driver loses power, the MOSFET turns back on, and the DC link discharges through a 3&nbsp;k&Omega; power resistor. The safe state requires no power at all.</p></section>
+<p>A mosfet connected to the discharge resistor automatically discharges the DC link when the shutdown circuit is activated or power is lost.</p></section>
 <section><h3>Fault latching and indicators</h3>
 <p>SR latches hold IMD and BMS faults and open relays in the shutdown circuit until someone resets them by hand. A comparator on the fused HV bus drives the HV-present indicator in hardware, independent of the MCU.</p></section>
 <section><h3>Power</h3>
@@ -64,10 +65,10 @@
 
 <div class="prose">
 <h2>Testing</h2>
-<p>To test precharge without a live pack, I used two low-voltage bench supplies to create a voltage difference across the precharge circuit. That let me exercise the precharge-complete detection and contactor sequencing safely on the bench.</p>
+<p>To test precharge without a live pack, I used two low-voltage bench supplies to create a voltage difference across the precharge circuit. This let me measure the voltage differential that would close the precharge contactor, verifying the functionality.</p>
 
 <h2>What I'd change</h2>
-<p>The precharge circuit on the first prototype needed rework. The bigger lesson was about process: when you modify a board on the bench, document it right away. Otherwise the next person, or you three weeks later, has no way to know the board no longer matches the schematic.</p>
+<p>The precharge circuit on the first prototype needed rework and modification. I also learned a lesson about documenntation. I should have documented the changes immediately after making them. This would have saved time and prevented confusion later on.</p>
 
 <h2>Key parts</h2>
 </div>

@@ -175,3 +175,6 @@ footer { margin-top: 4rem; border-top: 1px solid var(--rule); padding: 24px 0 48
   .index .tools { text-align: left; white-space: normal; }
   .section-split { grid-template-columns: 1fr; gap: 0; }
 }
+
+/* photo placeholder: swap for an <img> once the photo exists */
+.ph { display: flex; align-items: center; justify-content: center; aspect-ratio: 16/10; max-height: 560px; border: 2px dashed var(--rule); background: var(--surface); color: var(--muted); font-size: 0.95rem; text-align: center; padding: 16px; }
