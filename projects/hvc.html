@@ -50,7 +50,7 @@
 <section><h3>isoSPI to the cell monitors</h3>
 <p>An ADBMS6822 dual isoSPI transceiver with two transformers gives the Teensy two independent isoSPI ports. With one port at each end of the cell-monitor daisy chain, the chain becomes a ring. If one cable or board in the chain fails, the HVC can still reach every other board from the opposite end. Analog Devices calls this reversible isoSPI.</p></section>
 <section><h3>Precharge</h3>
-<p>A precharge contactor switches three 300&Omega; TO-247 power resistors in parallel (100&Omega; total). The Teensy 4.1 controls a fan that cools these resistors, allowing them to survive repeat precharges during inspection.</p></section>
+<p>A precharge contactor switches three 3000&Omega; TO-247 power resistors in parallel (1000&Omega; total). The Teensy 4.1 controls a fan that cools these resistors, allowing them to survive repeat precharges during inspection.</p></section>
 <section><h3>Precharge monitoring</h3>
 <p>An AMC0381D06-Q1 isolated amplifier, which has the high-voltage divider built in and a 600&nbsp;V input range, feeds the Teensy so firmware can watch precharge progress. A separate LM2903 comparator checks the voltage across the precharge circuit against a reference voltage and closes the main positive contactor only when the voltage reaches the desired level.</p></section>
 <section><h3>Contactor control</h3>
