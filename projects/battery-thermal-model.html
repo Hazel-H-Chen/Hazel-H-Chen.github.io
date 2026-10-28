@@ -22,18 +22,36 @@
 <a class="back" href="../index.html#projects">&larr; All projects</a>
 <div class="proj-head"><h1>Tractive Battery Thermal Model</h1></div>
 
-<p class="lede">This project proposes a MATLAB model that predicts cell temperature and state of charge across a full FSAE endurance run, to judge whether a theoretical Molicel P50B pack needs active cooling. All data used is sourced from Molicel's published data and lapsim power requirement simulations, and allows us to accurately predict cooling requirements before testing and assembling a battery pack.</p>
+<p class="lede">This project proposes a MATLAB model that predicts cell temperature and state of charge across a full FSAE endurance run, to judge whether a theoretical Molicel P50B pack needs active cooling. All inputs come from Molicel's published data and lapsim power simulations, so we can estimate cooling requirements before testing and assembling a battery pack.</p>
 <dl class="titleblock"><div><dt>Tools</dt><dd>MATLAB</dd></div><div><dt>Cell</dt><dd>Molicel P50B</dd></div><div><dt>Pack</dt><dd>Theoretical 140S3P pack</dd></div><div><dt>Inputs</dt><dd>LapSim power data over an endurance run, published DCIR vs SoC and cell voltage vs SoC data</dd></div><div><dt>Status</dt><dd>Model built, working on building testbench for in-house data collection and validation</dd></div></dl>
-<figure class="fig-hero"><img src="../img/thermal_temp_plot.jpg" alt="Simulatedcell temperature over a 22-minute endurance run" loading="lazy"><figcaption>Single-cell temperature over a 20-minute endurance run</figcaption></figure>
+<figure class="fig-hero"><img src="../img/thermal_temp_plot.jpg" alt="Simulated cell temperature over a 22-minute endurance run" loading="lazy"><figcaption>Single-cell temperature over a 22-minute endurance run</figcaption></figure>
 
 <div class="prose">
 <h2>Approach</h2>
-<p>The model solves a coupled two-state system: cell temperature and state of charge. Per-cell current comes from lapsim power data which gets divided across the entire pack. Internal resistance (DCIR) is looked up as a function of state of charge from Molicel's published P50B data, so resistance rises realistically as the pack drains.</p>
-<p class="eq">Q<sub>gen</sub> = I<sup>2</sup> R(SOC) &nbsp;&nbsp; Q<sub>loss</sub> = hA (T &minus; T<sub>amb</sub>) &nbsp;&nbsp; dSOC/dt = &minus;I / Q<sub>cell</sub></p>
-<p>This model assumes heat generation is ohmic, and heat rejection is lumped convection to ambient, where <i>hA</i> is the calibration parameter to be fitted against bench data. State of charge comes from coulomb counting and feeds back into the DCIR lookup, closing the loop. The endurance run is built by repeating the lapsim lap profile for all 20 laps.</p>
+<p>The model solves a coupled two-state system: cell temperature and state of charge. Lapsim pack power is split evenly across all 420 cells of the 140S3P pack, with regen ignored, and converted to per-cell current using the sagged terminal voltage (see below). Internal resistance (DCIR) is looked up as a function of state of charge from Molicel's published P50B data.</p>
+<div class="eq">
+<div><math displaystyle="true"><mi>m</mi><msub><mi>c</mi><mi>p</mi></msub><mfrac><mrow><mi>d</mi><mi>T</mi></mrow><mrow><mi>d</mi><mi>t</mi></mrow></mfrac><mo>=</mo><msub><mi>Q</mi><mtext>gen</mtext></msub><mo>&minus;</mo><msub><mi>Q</mi><mtext>loss</mtext></msub></math></div>
+<div><math displaystyle="true"><msub><mi>Q</mi><mtext>gen</mtext></msub><mo>=</mo><msup><mi>I</mi><mn>2</mn></msup><mi>R</mi><mo>(</mo><mtext>SOC</mtext><mo>)</mo></math></div>
+<div><math displaystyle="true"><msub><mi>Q</mi><mtext>loss</mtext></msub><mo>=</mo><mi>h</mi><mi>A</mi><mo>(</mo><mi>T</mi><mo>&minus;</mo><msub><mi>T</mi><mtext>amb</mtext></msub><mo>)</mo></math></div>
+<div><math displaystyle="true"><mfrac><mrow><mi>d</mi><mtext>SOC</mtext></mrow><mrow><mi>d</mi><mi>t</mi></mrow></mfrac><mo>=</mo><mo>&minus;</mo><mfrac><mi>I</mi><msub><mi>Q</mi><mtext>cell</mtext></msub></mfrac></math></div>
+</div>
+<p>The model assumes heat generation is ohmic and heat rejection is lumped convection to ambient. The specific heat <i>c<sub>p</sub></i> and the convection term <i>hA</i> are the calibration parameters to be fitted against bench data. State of charge comes from coulomb counting against a cell capacity of 4.6&nbsp;Ah, Molicel's rated capacity at a 60&nbsp;W discharge rather than the 5&nbsp;Ah nominal, and feeds back into the DCIR and voltage lookups, closing the loop. The endurance run is built by repeating the lapsim lap profile for all 20 laps, and the system is integrated with MATLAB's <code>ode45</code>.</p>
+
+<h2>Voltage sag</h2>
+<p>Dividing power by a fixed nominal voltage underestimates current, because terminal voltage drops under load and as the cell drains. Instead, the model looks up open-circuit voltage from Molicel's published voltage vs. SoC curve and treats the cell as that voltage source in series with its DCIR:</p>
+<div class="eq">
+<div><math displaystyle="true"><mi>V</mi><mo>=</mo><msub><mi>V</mi><mtext>oc</mtext></msub><mo>(</mo><mtext>SOC</mtext><mo>)</mo><mo>&minus;</mo><mi>I</mi><mi>R</mi><mo>(</mo><mtext>SOC</mtext><mo>)</mo></math></div>
+<div><math displaystyle="true"><msub><mi>P</mi><mtext>cell</mtext></msub><mo>=</mo><mi>V</mi><mi>I</mi></math></div>
+</div>
+<p>Solving these together for terminal voltage gives:</p>
+<div class="eq">
+<div><math displaystyle="true"><mi>V</mi><mo>=</mo><mfrac><mrow><msub><mi>V</mi><mtext>oc</mtext></msub><mo>+</mo><msqrt><msubsup><mi>V</mi><mtext>oc</mtext><mn>2</mn></msubsup><mo>&minus;</mo><mn>4</mn><msub><mi>P</mi><mtext>cell</mtext></msub><mi>R</mi></msqrt></mrow><mn>2</mn></mfrac></math></div>
+<div><math displaystyle="true"><mi>I</mi><mo>=</mo><mfrac><msub><mi>P</mi><mtext>cell</mtext></msub><mi>V</mi></mfrac></math></div>
+</div>
+<p>This is solved at every ODE time step, so current, and with it <math><msup><mi>I</mi><mn>2</mn></msup><mi>R</mi></math> heating, climbs on high-power sections of the lap and toward the end of the run, when <math><msub><mi>V</mi><mtext>oc</mtext></msub></math> is low and <math><mi>R</mi></math> is high.</p>
 
 <h2>Results</h2>
-<p>For the assumed conditions, cell temperature rises from about 30&nbsp;&deg;C to about 36&nbsp;&deg;C over the 20-minute run. The steepest climb comes in the first five minutes. State of charge falls almost linearly over the same run.</p>
+<p>For the assumed conditions, cell temperature rises from about 30&nbsp;&deg;C to 42.5&nbsp;&deg;C over the 22-minute run. The temperature rises rapidly during the start and end of the run. This makes sense as DCIR is higher when the cell is full or almost depleted, and lowest when the cell is at a moderate state of charge. State of charge falls almost linearly over the same run.</p>
 </div>
 <div class="fig-row">
 <figure class=""><img src="../img/thermal_soc_plot.jpg" alt="State of charge over the endurance run" loading="lazy"><figcaption>State of charge over the endurance run</figcaption></figure>
@@ -42,8 +60,8 @@
 
 <div class="prose">
 <h2>Limitations</h2>
-<p>The model is deliberately simple. Each cell is a single lumped thermal mass. Heat generation is ohmic only, ignoring entropic heat. Current is derived from power at a fixed nominal voltage, ignoring voltage sag. DCIR depends on state of charge but not temperature, and the convection term and material properties are typical Li-ion values, not measurements.</p>
-<p>Its strength is how little it needs. From a DCIR curve alone it produces useful predictions before a physical cell exists, which makes it a practical screening tool for comparing candidate cells before any bench testing. The next step is measuring DCIR and temperature rise on a real cell to calibrate <i>hA</i> and validate the model.</p>
+<p>The model is deliberately simple, but that simplicity gives us a clear baseline to test and validate our data against. Each cell is a single lumped thermal mass, and heat generation is still ohmic only, ignoring entropic heat. It now accounts for voltage sag, but DCIR depends on state of charge and not temperature, current is shared evenly across every cell, and regen is ignored. The specific heat (900&nbsp;J/kg&middot;K) and convection term (<i>hA</i> = 0.2&nbsp;W/K) are typical Li-ion values, not measurements.</p>
+<p>Its strength is how little data it needs. Every input comes from data publicly available on the manufacturer's website, so it produces useful predictions before a physical cell exists. The next step is measuring the specific heat capacity <i>c<sub>p</sub></i> and the convection term <i>hA</i> on a real cell to calibrate and validate the model.</p>
 </div>
 
 <nav class="next"><a href="../index.html#projects">All projects</a><a href="fusible-link-simulation.html">Next: Fusible Link Simulation</a></nav>

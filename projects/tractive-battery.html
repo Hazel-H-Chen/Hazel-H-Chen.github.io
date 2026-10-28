@@ -1,0 +1,75 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Tractive Battery | Hazel Chen</title>
+<meta name="description" content="128S pouch-cell tractive battery for the FSAE EV, with stacked modules that slide out from side access panels.">
+<link rel="stylesheet" href="../style.css">
+</head>
+<body>
+<header class="topbar"><div class="wrap">
+  <a class="name" href="../index.html">Hazel Chen</a>
+  <nav>
+    <a href="../index.html#projects">Projects</a>
+    <a href="../resume.pdf">Resume</a>
+    <a href="mailto:znp3rx@virginia.edu">Email</a>
+    <a href="https://www.linkedin.com/in/hazelchens/">LinkedIn</a>
+    <a href="https://github.com/Hazel-H-Chen">GitHub</a>
+  </nav>
+</div></header>
+<main class="wrap">
+<a class="back" href="../index.html#projects">&larr; All projects</a>
+<div class="proj-head"><h1>Tractive Battery</h1></div>
+
+<p class="lede">The high-voltage battery that powers the car. It is a 128S pouch-cell pack, split into eight 16S modules that stack vertically and slide out from the sides for service.</p>
+<dl class="titleblock"><div><dt>Role</dt><dd>Electrical and tractive battery subteam lead</dd></div><div><dt>Tools</dt><dd>Autodesk Fusion</dd></div><div><dt>Cell</dt><dd>SLPB9675175 pouch cell, 4.35 V max</dd></div><div><dt>Configuration</dt><dd>128S pouch cells, 8 modules of 16S</dd></div><div><dt>Max voltage</dt><dd>556.8 V (4.35 V per cell)</dd></div><div><dt>Team</dt><dd>Virginia Motorsports (UVA Formula SAE EV)</dd></div></dl>
+<figure class="fig-hero"><div class="ph">Photo placeholder: assembled tractive battery</div><figcaption>Assembled tractive battery</figcaption></figure>
+
+<div class="prose">
+<h2>Layout</h2>
+<p>The eight modules are stacked on top of each other instead of laid out flat. Each module holds 16 SLPB9675175 pouch cells in series, and the modules are wired in series for 128S total. At 4.35&nbsp;V per cell, the pack reaches 556.8&nbsp;V when fully charged.</p>
+</div>
+<figure class="fig-hero"><div class="ph">Photo placeholder: CAD of the module stack</div><figcaption>Module stack in CAD</figcaption></figure>
+
+<div class="prose">
+<h2>Module design</h2>
+<p>Each module uses a sandwich design. Between each pair of cells there is an aluminum heat spreader and a layer of Poron foam.</p>
+<p>The cell tabs are folded over each other and bolted down to connect the cells in series.</p>
+</div>
+<div class="fig-row">
+<figure><div class="ph">Photo placeholder: cell sandwich with heat spreaders and foam</div><figcaption>Cells, heat spreaders, and Poron foam</figcaption></figure>
+<figure><div class="ph">Photo placeholder: folded and bolted cell tabs</div><figcaption>Folded and bolted cell tabs</figcaption></figure>
+</div>
+
+<div class="prose">
+<h2>Module PCB stackup</h2>
+<p>Each module has two PCBs stacked above the cell tabs:</p>
+<ul>
+<li><b>Cell tap board.</b> This daughterboard sits directly under the bolted tabs and makes contact with them to read each cell's voltage. It also holds all of the module's thermistors.</li>
+<li><b>Segment mainboard.</b> Also called the <a href="bms-hand-soldering.html">BMS motherboard</a>, it sits above the cell tap board and handles all of the module's monitoring and control.</li>
+</ul>
+<p>Right now the two boards connect through connectors. We want to move to a flex PCB instead. A flex PCB holds up better to vibration than connectors and makes the module easier to assemble.</p>
+</div>
+<figure class="fig-hero"><div class="ph">Photo placeholder: module PCB stackup</div><figcaption>Cell tap board and segment mainboard stacked on the module</figcaption></figure>
+
+<div class="prose">
+<h2>Module access</h2>
+<p>The pack has access panels on the left and right sides. Before any work, we remove both panels and pull all of the maintenance plugs. The modules then slide out horizontally.</p>
+</div>
+<div class="fig-row">
+<figure><div class="ph">Photo placeholder: side access panel removed</div><figcaption>Side access panel removed</figcaption></figure>
+<figure><div class="ph">Photo placeholder: module sliding out</div><figcaption>Module sliding out of the stack</figcaption></figure>
+</div>
+
+<div class="prose">
+<h2>Electronics bay</h2>
+<p>An electronics bay at the back of the pack holds the contactors, main fuse, and current sensor, keeping them separate from the cells.</p>
+</div>
+<figure class="fig-hero"><div class="ph">Photo placeholder: electronics bay</div><figcaption>Electronics bay with contactors, fuse, and current sensor</figcaption></figure>
+
+<nav class="next"><a href="../index.html#projects">All projects</a><a href="hvc.html">Next: High Voltage Controller</a></nav>
+</main>
+<footer><div class="wrap">Hazel Chen &middot; University of Virginia &middot; <a href="mailto:znp3rx@virginia.edu">znp3rx@virginia.edu</a></div></footer>
+</body>
+</html>
