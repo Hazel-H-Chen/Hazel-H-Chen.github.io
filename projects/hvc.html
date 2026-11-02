@@ -24,7 +24,7 @@
 
 <p class="lede">A single PCB that handles everything between the FSAE car's tractive battery and the rest of the vehicle: precharge, contactor control, communication with the cell monitors, and the safety latches the rules require.</p>
 <dl class="titleblock"><div><dt>Role</dt><dd>Lead designer</dd></div><div><dt>Team</dt><dd>Virginia Motorsports FSAE</dd></div><div><dt>Tools</dt><dd>Altium Designer</dd></div><div><dt>Pack voltage</dt><dd>556 V max</dd></div><div><dt>Status</dt><dd>Prototype</dd></div></dl>
-<!-- ADD IMAGES HERE: e.g. <figure class="fig-hero"><img src="../img/hvc_render.png" alt="3D render of the HVC board in Altium" loading="lazy"><figcaption>3D render of the HVC board in Altium</figcaption></figure> -->
+<figure class="fig-hero"><img src="../img/hvc_prototype.jpg" alt="Assembled HVC prototype board with the precharge relay, isolated power modules, and Teensy header" loading="lazy"><figcaption>HVC prototype</figcaption></figure>
 
 <div class="prose">
 <h2>Why a new board</h2>
@@ -62,6 +62,7 @@
 <section><h3>Power</h3>
 <p>An LM5163-Q1 buck converter makes 5&nbsp;V for the logic. Isolated DC-DC modules power the circuitry referenced to the HV side.</p></section>
 </div>
+<figure class="fig-hero"><img src="../img/hvc_enclosure_fit.jpg" alt="HVC board seen through a cutout in the aluminum pack enclosure" loading="lazy"><figcaption>Test-fitting the HVC in the pack enclosure</figcaption></figure>
 
 <div class="prose">
 <h2>Testing</h2>
@@ -74,7 +75,7 @@
 </div>
 <table class="parts"><tbody><tr><th scope="row"><a href="https://www.analog.com/en/products/adbms6822.html">ADBMS6822</a></th><td>Dual isoSPI transceiver, ring topology to the cell monitors</td></tr><tr><th scope="row"><a href="https://www.ti.com/product/AMC0381D-Q1">AMC0381D06-Q1</a></th><td>Isolated amplifier with built-in HV divider for precharge voltage sensing</td></tr><tr><th scope="row"><a href="https://www.ti.com/product/TPSI3052-Q1">TPSI3052-Q1</a></th><td>Isolated switch driver with integrated bias, holds off the discharge MOSFET</td></tr><tr><th scope="row"><a href="https://www.digikey.com/en/products/detail/ixys/IXTH6N100D2/2183266">IXTH6N100D2</a></th><td>1000 V depletion-mode MOSFET, fail-safe discharge</td></tr><tr><th scope="row"><a href="https://www.ti.com/product/TPS1H200A-Q1">TPS1H200A-Q1</a></th><td>Smart high-side switch for the contactor coil</td></tr><tr><th scope="row"><a href="https://www.ti.com/product/LM2903B">LM2903B</a></th><td>Comparators for hardware precharge-complete and HV-present detection</td></tr><tr><th scope="row"><a href="https://www.pjrc.com/store/teensy41.html">Teensy 4.1</a></th><td>Main controller</td></tr><tr><th scope="row"><a href="https://www.ti.com/product/TCAN3414">TCAN3414</a></th><td>CAN transceiver</td></tr></tbody></table>
 
-<nav class="next"><a href="../index.html#projects">All projects</a><a href="benchtop-pdb.html">Next: Benchtop Power Distribution Board</a></nav>
+<nav class="next"><a href="../index.html#projects">All projects</a><a href="segment-bms.html">Next: Segment BMS Rev 2</a></nav>
 </main>
 <footer><div class="wrap">Hazel Chen &middot; University of Virginia &middot; <a href="mailto:znp3rx@virginia.edu">znp3rx@virginia.edu</a></div></footer>
 </body>

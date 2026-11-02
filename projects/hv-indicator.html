@@ -24,7 +24,6 @@
 
 <p class="lede">FSAE rules require an indicator that lights whenever the tractive system is above a set voltage. I designed a board that powers itself from the tractive bus and outputs an isolated 12&nbsp;V, so a standard low-voltage panel-mount light can be mounted anywhere on the tractive battery.</p>
 <dl class="titleblock"><div><dt>Tools</dt><dd>Altium Designer</dd></div><div><dt>Key parts</dt><dd>STMicroelectronics VIPer06, TI LM25180</dd></div><div><dt>Isolated output</dt><dd>12 V from a 10&ndash;30 V intermediate rail</dd></div><div><dt>Team</dt><dd>Virginia Motorsports (UVA Formula SAE EV)</dd></div></dl>
-<figure class="fig-hero"><div class="ph">Photo placeholder: assembled board with the panel-mount light lit</div><figcaption>Assembled indicator board</figcaption></figure>
 
 <div class="prose">
 <h2>Why not just an LED?</h2>
@@ -37,12 +36,13 @@
 <li><b>Isolated flyback.</b> A TI LM25180 flyback converter takes that 10&ndash;30&nbsp;V rail and produces an isolated 12&nbsp;V output for the light. Because the output is isolated from the tractive system, the light and its wiring are ordinary low-voltage parts.</li>
 </ul>
 </div>
-<figure class="fig-hero"><div class="ph">Photo placeholder: Altium layout of the current revision</div><figcaption>Current revision in Altium</figcaption></figure>
+<figure class="fig-hero"><img src="../img/hvi_v11_layout.jpg" alt="Altium 3D view of the Voltage Indicator V1.1 board with the LM25180 flyback on board" loading="lazy"><figcaption>V1.1 in Altium</figcaption></figure>
 
 <div class="prose">
 <h2>Replacing the isolated module</h2>
 <p>The first revision used an off-the-shelf Murata isolated DC-DC module for the isolation stage. In testing, the module kept triggering the VIPer06's protection shutdown, so the indicator wouldn't stay on reliably. I replaced it with my own flyback built around the LM25180. Designing the stage myself gave me control over its startup and load behavior, so it works properly with the VIPer06 ahead of it.</p>
 </div>
+<figure class="fig-hero"><img src="../img/hvi_v1_flyback.jpg" alt="Voltage Indicator V1 board wired to a separate isolated flyback board in place of the Murata module" loading="lazy"><figcaption>V1 board with my flyback board wired in place of the Murata module</figcaption></figure>
 
 <nav class="next"><a href="../index.html#projects">All projects</a><a href="hvc.html">Next: High Voltage Controller</a></nav>
 </main>

@@ -1,0 +1,66 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Segment BMS Rev 2 | Hazel Chen</title>
+<meta name="description" content="Rev 2 of the two-board cell monitoring stack for each 16-cell segment of the FSAE EV tractive battery.">
+<link rel="stylesheet" href="../style.css">
+</head>
+<body>
+<header class="topbar"><div class="wrap">
+  <a class="name" href="../index.html">Hazel Chen</a>
+  <nav>
+    <a href="../index.html#projects">Projects</a>
+    <a href="../resume.pdf">Resume</a>
+    <a href="mailto:znp3rx@virginia.edu">Email</a>
+    <a href="https://www.linkedin.com/in/hazelchens/">LinkedIn</a>
+    <a href="https://github.com/Hazel-H-Chen">GitHub</a>
+  </nav>
+</div></header>
+<main class="wrap">
+<a class="back" href="../index.html#projects">&larr; All projects</a>
+<div class="proj-head"><h1>Segment BMS Rev 2</h1></div>
+
+<p class="lede">Each 16-cell segment of the tractive battery has a two-board BMS stack that measures cell voltages and temperatures. Rev 1 was designed by the team's lead electrical engineer. I designed Rev 2, focusing on routing and mechanical packaging, and cut the cell tap board from 6 layers to 2.</p>
+<dl class="titleblock"><div><dt>Role</dt><dd>Rev 2 designer</dd></div><div><dt>Team</dt><dd>Virginia Motorsports FSAE</dd></div><div><dt>Tools</dt><dd>Altium Designer</dd></div><div><dt>Pack</dt><dd>556 V max, 6.8 kWh, 128S1P pouch cells</dd></div><div><dt>Status</dt><dd>Rev 2, in progress</dd></div></dl>
+<figure class="fig-hero"><img src="../img/Segment_MB_3drender.png" alt="3D render of the Rev 2 BMS main board with the ADBMS6830 in the center" loading="lazy"><figcaption>Rev 2 main board in Altium</figcaption></figure>
+
+<div class="prose">
+<h2>The two-board stack</h2>
+<p>The pack is split into segments of 16 cells. Each segment has two boards:</p>
+<ul>
+<li><b>Cell tap daughterboard.</b> The pouch cell tabs are clamped directly to this board. It holds the per-tap fuses and the thermistors.</li>
+<li><b>Main board.</b> A 4-layer board built around the Analog Devices ADBMS6830 16-channel cell monitor. It communicates over isoSPI with the <a href="hvc.html">High Voltage Controller</a>, which reads every segment in the pack.</li>
+</ul>
+<p>Cell balancing is passive. Each cell discharges through a 20&nbsp;&Omega; resistor, which gives a maximum balance current of about 218&nbsp;mA at 4.35&nbsp;V.</p>
+</div>
+<table class=""><tbody><tr><th scope="row">Cells per segment</th><td>16 in series</td></tr><tr><th scope="row">Segments in pack</th><td>8 (128S1P, 556 V max, 6.8 kWh)</td></tr><tr><th scope="row">Cell monitor</th><td>Analog Devices ADBMS6830, 16 channels</td></tr><tr><th scope="row">Communication</th><td>isoSPI, two ports per board</td></tr><tr><th scope="row">Cell taps</th><td>17, each fused on the cell tap board</td></tr><tr><th scope="row">Temperature sensing</th><td>Thermistors on the cell tap board<!-- TODO: add thermistor count --></td></tr><tr><th scope="row">Balancing</th><td>Passive, 20 &Omega; per cell, 218 mA max</td></tr><tr><th scope="row">Main board</th><td>4 layers</td></tr><tr><th scope="row">Cell tap board</th><td>2 layers (6 in Rev 1)</td></tr><tr><th scope="row">Board-to-board connection</th><td>FPC between the two rigid boards, single-row connectors (stacking connector in Rev 1)</td></tr></tbody></table>
+<figure class="fig-hero"><img src="../img/SegmentDB_redner.png" alt="3D render of the Rev 2 cell tap daughterboard with 16 cell tab pads, fuses, and thermistors" loading="lazy"><figcaption>Rev 2 cell tap daughterboard</figcaption></figure>
+
+<div class="prose">
+<h2>What I changed in Rev 2</h2>
+<p>Rev 2 keeps the Rev 1 circuit architecture. My work was on routing and mechanical packaging.</p>
+<p>The biggest change is how the two boards connect. Rev 1 used a stacking connector. Rev 2 connects the two rigid boards with an FPC and a single-row connector, which freed up a lot of room for routing. That let me cut the cell tap board from 6 layers to 2. The main board stayed at 4 layers. The FPC also holds up better to vibration and makes the stack easier to assemble.</p>
+<!-- TODO: add more detail on how the routing was reworked, if wanted -->
+<!-- TODO: add cost or lead-time savings from the layer reduction, if known -->
+<!-- TODO: add what changed in the mechanical packaging -->
+</div>
+<div class="fig-pair">
+<figure><img src="../img/Segment_DB_Before.png" alt="Altium layout of the 6-layer Rev 1 cell tap daughterboard" loading="lazy"><figcaption>Rev 1 cell tap board, 6 layers</figcaption></figure>
+<figure><img src="../img/Segment_DB_PCBdesign.png" alt="Altium layout of the 2-layer Rev 2 cell tap daughterboard" loading="lazy"><figcaption>Rev 2 cell tap board, 2 layers</figcaption></figure>
+</div>
+<!-- PHOTO (once built): assembled stack and stack mounted on a segment
+<div class="fig-row">
+<figure><img src="../img/assembled-stack.jpg" alt="Assembled segment BMS stack with the main board on the cell tap board" loading="lazy"><figcaption>Assembled BMS stack</figcaption></figure>
+<figure><img src="../img/mounted-on-segment.jpg" alt="Segment BMS stack mounted on a battery segment with the cell tabs clamped to the cell tap board" loading="lazy"><figcaption>BMS stack mounted on a segment</figcaption></figure>
+</div>
+-->
+
+<!-- TODO: add a Next steps section (e.g. ordering, assembly, and testing Rev 2) once known -->
+
+<nav class="next"><a href="../index.html#projects">All projects</a><a href="benchtop-pdb.html">Next: Benchtop Power Distribution Board</a></nav>
+</main>
+<footer><div class="wrap">Hazel Chen &middot; University of Virginia &middot; <a href="mailto:znp3rx@virginia.edu">znp3rx@virginia.edu</a></div></footer>
+</body>
+</html>

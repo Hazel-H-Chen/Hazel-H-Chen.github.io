@@ -113,7 +113,7 @@ p { margin: 0 0 1rem; }
 .index a:hover h3 { color: var(--hv-text); }
 .index h3 { margin: 0 0 4px; font-size: 1.55rem; }
 .index p { margin: 0; color: var(--muted); font-size: 0.98rem; line-height: 1.45; }
-.index .thumb { width: 220px; aspect-ratio: 16/10; object-fit: cover; border: 1px solid var(--rule); background: var(--surface); }
+.index .thumb { width: auto; height: auto; max-width: 220px; max-height: 190px; justify-self: center; border: 1px solid var(--rule); background: var(--surface); } /* keep each image's own shape so nothing important gets cropped */
 .index .tools { font-size: 0.9rem; color: var(--muted); text-align: right; white-space: nowrap; }
 .tile {
   width: 220px; aspect-ratio: 16/10; background: var(--tile); color: #fff;
@@ -144,6 +144,9 @@ figcaption { font-size: 0.9rem; color: var(--muted); margin-top: 6px; text-align
 .fig-hero img { width: auto; max-width: 100%; max-height: 560px; }
 .fig-row { display: grid; grid-template-columns: repeat(auto-fit, minmax(260px, 1fr)); gap: 20px; align-items: start; }
 .fig-row figure { margin: 0; }
+.fig-pair { display: flex; justify-content: center; gap: 40px; flex-wrap: wrap; margin: 1.5rem 0; }
+.fig-pair figure { margin: 0; }
+.fig-pair img { height: 520px; width: auto; }
 .section-split { display: grid; grid-template-columns: minmax(0, 1fr) minmax(0, 0.9fr); gap: 36px; align-items: start; }
 .section-split figure { margin-top: 0.4rem; }
 
@@ -171,7 +174,7 @@ footer { margin-top: 4rem; border-top: 1px solid var(--rule); padding: 24px 0 48
   .hero-grid { grid-template-columns: 1fr; }
   .headshot { width: 120px; order: -1; }
   .index a { grid-template-columns: 1fr; gap: 10px; }
-  .index .thumb { width: 100%; }
+  .index .thumb { max-width: 100%; max-height: 260px; justify-self: start; }
   .tile { width: 100%; aspect-ratio: auto; min-height: 96px; }
   .index .tools { text-align: left; white-space: normal; }
   .section-split { grid-template-columns: 1fr; gap: 0; }
