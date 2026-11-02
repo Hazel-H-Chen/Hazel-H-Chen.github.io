@@ -40,11 +40,11 @@
 
 <div class="prose">
 <h2>Replacing the isolated module</h2>
-<p>The first revision used an off-the-shelf Murata isolated DC-DC module for the isolation stage. In testing, the module kept triggering the VIPer06's protection shutdown, so the indicator wouldn't stay on reliably. I replaced it with my own flyback built around the LM25180. Designing the stage myself gave me control over its startup and load behavior, so it works properly with the VIPer06 ahead of it.</p>
+<p>The first revision used an off-the-shelf Murata isolated DC-DC module for the isolation stage. In testing, the light would turn on for about half a second, shut off, and then repeat, so it never stayed on. Something was tripping a protection circuit and restarting. I had already designed an isolated flyback around the LM25180, so I wired it in place of the Murata module, and the light stayed on. I haven't pinned down the root cause yet, so I moved the flyback onto the board for V1.1.</p>
 </div>
 <figure class="fig-hero"><img src="../img/hvi_v1_flyback.jpg" alt="Voltage Indicator V1 board wired to a separate isolated flyback board in place of the Murata module" loading="lazy"><figcaption>V1 board with my flyback board wired in place of the Murata module</figcaption></figure>
 
-<nav class="next"><a href="../index.html#projects">All projects</a><a href="hvc.html">Next: High Voltage Controller</a></nav>
+<nav class="next"><a href="../index.html#projects">All projects</a><a href="benchtop-pdb.html">Next: Benchtop Power Distribution Board</a></nav>
 </main>
 <footer><div class="wrap">Hazel Chen &middot; University of Virginia &middot; <a href="mailto:znp3rx@virginia.edu">znp3rx@virginia.edu</a></div></footer>
 </body>

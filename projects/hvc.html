@@ -46,7 +46,7 @@
 <h2>How it works</h2>
 <div class="blocks">
 <section><h3>Control and CAN</h3>
-<p>A Teensy 4.1 runs the board. The Teensy is our main microcontroller for all boards. The 4.1 was chosen becuase of its dual SPI ability, which allows us to implement loop topology for isoSPI. A TCAN3414 transceiver connects it to the car's CAN bus.</p></section>
+<p>A Teensy 4.1 runs the board. The Teensy is our main microcontroller for all boards. The 4.1 was chosen because of its dual SPI ability, which allows us to implement loop topology for isoSPI. A TCAN3414 transceiver connects it to the car's CAN bus.</p></section>
 <section><h3>isoSPI to the cell monitors</h3>
 <p>An ADBMS6822 dual isoSPI transceiver with two transformers gives the Teensy two independent isoSPI ports. With one port at each end of the cell-monitor daisy chain, the chain becomes a ring. If one cable or board in the chain fails, the HVC can still reach every other board from the opposite end. Analog Devices calls this reversible isoSPI.</p></section>
 <section><h3>Precharge</h3>
@@ -69,7 +69,7 @@
 <p>To test precharge without a live pack, I used two low-voltage bench supplies to create a voltage difference across the precharge circuit. This let me find the voltage where the main contactor closes and the precharge contactor opens. Extrapolated to pack voltage, this happens at 93%, above the 90% the rules require.</p>
 
 <h2>What I'd change</h2>
-<p>The precharge circuit on the first prototype needed rework and modification. I also learned a lesson about documenntation. I should have documented the changes immediately after making them. This would have saved time and prevented confusion later on.</p>
+<p>The precharge circuit on the first prototype needed rework and modification. I also learned a lesson about documentation. I should have documented the changes immediately after making them. This would have saved time and prevented confusion later on.</p>
 
 <h2>Key parts</h2>
 </div>
