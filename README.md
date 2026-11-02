@@ -6,7 +6,7 @@ I'm a mechanical engineering student at the University of Virginia, minoring in 
 
 ## Projects
 
-**Virginia Motorsports (UVA Formula SAE EV)**
+**[Virginia Motorsports (UVA Formula SAE EV)](https://hazel-h-chen.github.io/#motorsports)**
 - Tractive Battery
 - High Voltage Controller (HVC)
 - Segment BMS Rev 2
@@ -15,10 +15,12 @@ I'm a mechanical engineering student at the University of Virginia, minoring in 
 - Tractive Battery Thermal Model
 - Fusible Link Simulation
 
-**Personal builds**
+**[Personal builds](https://hazel-h-chen.github.io/#personal)**
 - PocketSens Portable Sensor Suite
 - Future Frame LightCore
 - Future Frame Hybrid Viewfinder
+
+**[Skills](https://hazel-h-chen.github.io/#skills)**
 
 ## Contact
 
