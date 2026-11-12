@@ -2,15 +2,16 @@
    Hazel Chen portfolio
    Colors live here. Change a value once and it updates everywhere.
    ------------------------------------------------------------ */
-/* Fonts are self-hosted in /fonts (Barlow, SIL Open Font License) */
+/* Iosevka (CDN) for headings, nav and labels; Barlow (self-hosted in /fonts, SIL OFL) for reading text. */
+@import url("https://cdn.jsdelivr.net/npm/@fontsource/iosevka@5.0.0/index.css");
 @font-face { font-family: "Barlow"; src: url("fonts/barlow-latin-400-normal.woff2") format("woff2"); font-weight: 400; font-style: normal; font-display: swap; }
 @font-face { font-family: "Barlow"; src: url("fonts/barlow-latin-400-italic.woff2") format("woff2"); font-weight: 400; font-style: italic; font-display: swap; }
 @font-face { font-family: "Barlow"; src: url("fonts/barlow-latin-500-normal.woff2") format("woff2"); font-weight: 500; font-style: normal; font-display: swap; }
 @font-face { font-family: "Barlow"; src: url("fonts/barlow-latin-600-normal.woff2") format("woff2"); font-weight: 600; font-style: normal; font-display: swap; }
-@font-face { font-family: "Barlow Condensed"; src: url("fonts/barlow-condensed-latin-600-normal.woff2") format("woff2"); font-weight: 600; font-style: normal; font-display: swap; }
-@font-face { font-family: "Barlow Condensed"; src: url("fonts/barlow-condensed-latin-700-normal.woff2") format("woff2"); font-weight: 700; font-style: normal; font-display: swap; }
 
 :root {
+  --mono: "Iosevka", "SFMono-Regular", "Consolas", "Liberation Mono", monospace;
+  --sans: "Barlow", system-ui, sans-serif;
   --bg: #f4f6f7;
   --surface: #ffffff;
   --ink: #17202a;
@@ -41,7 +42,7 @@ body {
   margin: 0;
   background: var(--bg);
   color: var(--ink);
-  font-family: "Barlow", system-ui, sans-serif;
+  font-family: var(--sans);
   font-size: 1.0625rem;
   line-height: 1.6;
 }
@@ -52,11 +53,13 @@ a:hover { text-decoration-thickness: 2px; }
 
 .wrap { max-width: var(--maxw); margin: 0 auto; padding: 0 20px; }
 
+h1, h2, h3, .topbar nav, .back, .tools, .seen-in, figcaption, .titleblock dt, th, .next {
+  font-family: var(--mono);
+}
 h1, h2, h3 {
-  font-family: "Barlow Condensed", "Barlow", sans-serif;
-  font-weight: 600;
+  font-weight: 700;
   line-height: 1.1;
-  letter-spacing: 0.005em;
+  letter-spacing: -0.02em;
   margin: 0;
 }
 h2 { font-size: 1.9rem; margin: 3rem 0 0.75rem; }
@@ -75,7 +78,7 @@ p { margin: 0 0 1rem; }
   gap: 1rem; padding-top: 14px; padding-bottom: 14px; flex-wrap: wrap;
 }
 .topbar .name {
-  font-family: "Barlow Condensed", sans-serif; font-weight: 600;
+  font-family: var(--mono); font-weight: 700;
   font-size: 1.3rem; color: var(--ink); text-decoration: none;
 }
 .topbar nav { display: flex; gap: 1.25rem; flex-wrap: wrap; font-size: 0.95rem; }
@@ -88,17 +91,16 @@ p { margin: 0 0 1rem; }
   display: grid; grid-template-columns: 1fr 200px; gap: 40px; align-items: end;
 }
 .hero h1 {
-  font-size: clamp(3.4rem, 11vw, 7.5rem);
+  font-size: clamp(2.6rem, 7vw, 4.5rem);
   font-weight: 700;
-  line-height: 0.88;
-  letter-spacing: -0.01em;
-  border-bottom: 6px solid var(--hv);
-  padding-bottom: 14px;
+  line-height: 0.95;
+  letter-spacing: -0.02em;
+  border-bottom: 4px solid var(--hv);
+  padding-bottom: 12px;
   display: inline-block;
 }
-.hero .intro { font-size: 1.35rem; line-height: 1.4; margin: 24px 0 12px; max-width: 36rem; }
-.hero .bio { color: var(--muted); max-width: 38rem; }
-.hero .links { display: flex; gap: 1.5rem; flex-wrap: wrap; margin-top: 1rem; font-weight: 500; }
+.hero .intro { font-size: 1.3rem; line-height: 1.45; margin: 24px 0 12px; max-width: 36rem; }
+.hero .bio { color: var(--muted); max-width: 38rem; margin: 0; }
 .headshot { width: 200px; aspect-ratio: 1; object-fit: cover; border: 1px solid var(--rule); }
 
 /* ---------- project index ---------- */
@@ -107,18 +109,32 @@ p { margin: 0 0 1rem; }
 .index { list-style: none; padding: 0; margin: 0; }
 .index li { border-bottom: 1px solid var(--rule); }
 .index a {
-  display: grid; grid-template-columns: 220px 1fr auto; gap: 24px; align-items: center;
-  padding: 18px 0; color: inherit; text-decoration: none;
+  display: grid; grid-template-columns: 200px 1fr; gap: 24px; align-items: center;
+  padding: 20px 0; color: inherit; text-decoration: none;
 }
 .index a:hover h3 { color: var(--hv-text); }
-.index h3 { margin: 0 0 4px; font-size: 1.55rem; }
-.index p { margin: 0; color: var(--muted); font-size: 0.98rem; line-height: 1.45; }
-.index .thumb { width: auto; height: auto; max-width: 220px; max-height: 190px; justify-self: center; border: 1px solid var(--rule); background: var(--surface); } /* keep each image's own shape so nothing important gets cropped */
-.index .tools { font-size: 0.9rem; color: var(--muted); text-align: right; white-space: nowrap; }
+.index a:hover .thumb { border-color: var(--hv); }
+.index h3 { margin: 0 0 6px; font-size: 1.35rem; }
+.index p { margin: 0 0 8px; color: var(--muted); font-size: 1rem; line-height: 1.5; }
+/* every thumbnail is the same 4:3 box; use object-position on one image if its crop hides something */
+.index .thumb {
+  width: 200px; aspect-ratio: 4 / 3; object-fit: cover;
+  border: 1px solid var(--rule); background: var(--surface); transition: border-color 0.15s;
+}
+.index .tools { font-size: 0.82rem; color: var(--hv-text); letter-spacing: 0.02em; }
+
+/* ---------- skills ---------- */
+.skill-grid { display: grid; grid-template-columns: repeat(auto-fill, minmax(300px, 1fr)); gap: 16px; margin-top: 1.25rem; }
+.skill-card { background: var(--surface); border: 1px solid var(--rule); border-top: 3px solid var(--hv); padding: 16px 18px 14px; }
+.skill-card h3 { margin: 0 0 10px; font-size: 1.1rem; }
+.skill-points { margin: 0 0 10px; padding-left: 1.1rem; font-size: 0.95rem; line-height: 1.5; color: var(--muted); }
+.skill-points li { margin-bottom: 0.4rem; }
+.skill-points li::marker { color: var(--hv); }
+.seen-in { margin: 0; padding-top: 10px; border-top: 1px dashed var(--rule); font-size: 0.8rem; color: var(--muted); }
 .tile {
   width: 220px; aspect-ratio: 16/10; background: var(--tile); color: #fff;
   display: flex; flex-direction: column; justify-content: flex-end; padding: 12px 14px;
-  font-family: "Barlow Condensed", sans-serif; border-left: 6px solid var(--hv);
+  font-family: var(--mono); border-left: 6px solid var(--hv);
 }
 .tile b { font-size: 2.6rem; line-height: 0.9; font-weight: 700; }
 .tile span { font-size: 0.95rem; opacity: 0.8; }
@@ -173,10 +189,10 @@ footer { margin-top: 4rem; border-top: 1px solid var(--rule); padding: 24px 0 48
   .hero { padding-top: 40px; }
   .hero-grid { grid-template-columns: 1fr; }
   .headshot { width: 120px; order: -1; }
-  .index a { grid-template-columns: 1fr; gap: 10px; }
-  .index .thumb { max-width: 100%; max-height: 260px; justify-self: start; }
+  .index a { grid-template-columns: 1fr; gap: 12px; }
+  .index .thumb { width: 100%; aspect-ratio: 16 / 9; }
   .tile { width: 100%; aspect-ratio: auto; min-height: 96px; }
-  .index .tools { text-align: left; white-space: normal; }
+  .skill-grid { grid-template-columns: 1fr; }
   .section-split { grid-template-columns: 1fr; gap: 0; }
 }
 
