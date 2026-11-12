@@ -52,11 +52,11 @@
 <section><h3>Precharge</h3>
 <p>A precharge contactor switches three 3000&Omega; TO-247 power resistors in parallel (1000&Omega; total). The Teensy 4.1 controls a fan that cools these resistors, allowing them to survive repeat precharges during inspection.</p></section>
 <section><h3>Precharge monitoring</h3>
-<p>An AMC0381D06-Q1 isolated amplifier, which has the high-voltage divider built in and a 600&nbsp;V input range, feeds the Teensy so firmware can watch precharge progress. A separate LM2903 comparator checks the voltage across the precharge circuit against a reference voltage and closes the main positive contactor only when the voltage reaches the desired level.</p></section>
+<p>A comparator-only precharge either works or it doesn't, with no clue why. The HVC keeps an LM2903 comparator to close the main positive contactor in hardware, and adds an AMC0381D06-Q1 isolated amplifier so the Teensy can watch the precharge curve. Too fast suggests the motor controller isn't connected; too slow points to leakage or a failed resistor.</p></section>
 <section><h3>Contactor control</h3>
-<p>A TPS1H200A-Q1 smart high-side switch drives the main positive contactor coil from the shutdown circuit. The contactors' auxiliary contacts are read back through a photorelay, so the MCU can see whether each contactor actually opened or closed and flag a weld.</p></section>
+<p>Telling a contactor to open doesn't mean it did. Contacts can weld shut and leave HV live. A TPS1H200A-Q1 smart high-side switch drives the main positive coil from the shutdown circuit, and each contactor's auxiliary contacts are read back through a photorelay, so the MCU can confirm every open and close and flag a weld.</p></section>
 <section><h3>Discharge</h3>
-<p>A mosfet connected to the discharge resistor automatically discharges the DC link when the shutdown circuit is activated or power is lost.</p></section>
+<p>Even after the contactors open, the motor controller's DC link capacitors can hold a dangerous charge. A MOSFET switches in a discharge resistor to drain them automatically whenever the shutdown circuit opens or the board loses power, so it fails safe without relying on firmware.</p></section>
 <section><h3>Fault latching and indicators</h3>
 <p>SR latches hold IMD and BMS faults and open relays in the shutdown circuit until someone resets them by hand. A comparator on the fused HV bus drives the HV-present indicator in hardware, independent of the MCU.</p></section>
 <section><h3>Power</h3>
