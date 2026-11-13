@@ -5,6 +5,7 @@
 <meta name="viewport" content="width=device-width, initial-scale=1">
 <title>Tractive Battery Thermal Model | Hazel Chen</title>
 <meta name="description" content="MATLAB model predicting cell temperature and state of charge over a full FSAE endurance run.">
+<link rel="icon" type="image/svg+xml" href="../img/cell-buddy.svg">
 <link rel="stylesheet" href="../style.css">
 </head>
 <body>
@@ -59,13 +60,26 @@
 </div>
 
 <div class="prose">
+<h2>Try the model</h2>
+<p>This is the same model running in the browser, using the same lapsim and Molicel DCIR data. Change an assumption and the see how the temperature curve changes. Hover over the plot to read values.</p>
+</div>
+<div class="sim" id="thermal-sim">
+<noscript><p>The interactive model needs JavaScript. The plots above show the result for the default settings.</p></noscript>
+</div>
+<p class="sim-source">Cell temperature (&deg;C) over the 20-lap run. Source: <a href="../SingleCellLumped.m">SingleCellLumped.m</a> (MATLAB).</p>
+<script src="thermal-model-data.js"></script>
+<script src="thermal-model.js"></script>
+
+<div class="prose">
 <h2>Limitations</h2>
 <p>The model is deliberately simple, but that simplicity gives us a clear baseline to test and validate our data against. Each cell is a single lumped thermal mass, and heat generation is still ohmic only, ignoring entropic heat. It now accounts for voltage sag, but DCIR depends on state of charge and not temperature, current is shared evenly across every cell, and regen is ignored. The specific heat (900&nbsp;J/kg&middot;K) and convection term (<i>hA</i> = 0.2&nbsp;W/K) are typical Li-ion values, not measurements.</p>
 <p>Its strength is how little data it needs. Every input comes from data publicly available on the manufacturer's website, so it produces useful predictions before a physical cell exists. The next step is measuring the specific heat capacity <i>c<sub>p</sub></i> and the convection term <i>hA</i> on a real cell to calibrate and validate the model.</p>
 </div>
 
-<nav class="next"><a href="../index.html#projects">All projects</a><a href="fusible-link-simulation.html">Next: Fusible Link Simulation</a></nav>
+<nav class="next"><a href="../index.html#projects">All projects</a><a href="hvc.html">Next: High Voltage Controller</a></nav>
 </main>
-<footer><div class="wrap">Hazel Chen &middot; University of Virginia &middot; <a href="mailto:znp3rx@virginia.edu">znp3rx@virginia.edu</a></div></footer>
+<footer><div class="wrap">
+<p class="foot-buddy"><svg class="buddy" viewBox="0 0 150 150" aria-hidden="true"><path class="b-line b-body" d="M62 24 q13 -5 26 0 l0 8 l-26 0 z"/><path class="b-line b-body" d="M46 36 q29 -9 58 0 q3 44 0 86 q-29 9 -58 0 q-3 -42 0 -86 z"/><path class="b-line" d="M46 50 q29 8 58 0"/><rect class="b-band" x="48" y="100" width="54" height="14" rx="3"/><path class="b-line" d="M47 100 q28 6 56 0 M47 114 q28 6 56 0"/><circle class="b-ink b-eye" cx="64" cy="74" r="4.5"/><circle class="b-ink b-eye" cx="86" cy="74" r="4.5"/><path class="b-line" d="M68 84 q7 7 14 0"/><ellipse class="b-blush" cx="57" cy="85" rx="5" ry="3"/><ellipse class="b-blush" cx="93" cy="85" rx="5" ry="3"/><path class="b-line" d="M45 78 q-14 2 -16 -12"/><path class="b-line b-wave" d="M105 78 q14 -4 14 -18"/><path class="b-line" d="M62 126 l-2 12 M88 126 l2 12"/><path class="b-line b-spark" d="M118 46 l6 -8 M124 52 l10 -3 M112 42 l1 -10"/></svg> thanks for scrolling all the way down!</p>
+Hazel Chen &middot; University of Virginia &middot; <a href="mailto:znp3rx@virginia.edu">znp3rx@virginia.edu</a></div></footer>
 </body>
 </html>

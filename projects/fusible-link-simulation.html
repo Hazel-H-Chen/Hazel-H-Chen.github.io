@@ -5,6 +5,7 @@
 <meta name="viewport" content="width=device-width, initial-scale=1">
 <title>Fusible Link Simulation | Hazel Chen</title>
 <meta name="description" content="Coupled electro-thermal Ansys model of nickel-strip fusible links for a cylindrical-cell pack.">
+<link rel="icon" type="image/svg+xml" href="../img/cell-buddy.svg">
 <link rel="stylesheet" href="../style.css">
 </head>
 <body>
@@ -22,8 +23,8 @@
 <a class="back" href="../index.html#projects">&larr; All projects</a>
 <div class="proj-head"><h1>Fusible Link Simulation</h1></div>
 
-<p class="lede">An Ansys model to find which nickel strip geometry fuses reliably at a target fault current, so the strips connecting cells in a cylindrical-cell pack can double as fusible links.</p>
-<dl class="titleblock"><div><dt>Role</dt><dd>Full design and implementation (individual project)</dd></div><div><dt>Tools</dt><dd>Ansys Mechanical, Ansys Workbench</dd></div><div><dt>Analysis</dt><dd>Coupled electro-thermal transient</dd></div><div><dt>Status</dt><dd>Simulation complete</dd></div></dl>
+<p class="lede">An Ansys model to find which nickel strip geometry fuses reliably at a target fault current, so the strips connecting cells in a cylindrical-cell pack can double as fusible links. The main result was not a geometry: I could never get the simulation to agree with bench tests, because the answer depends so heavily on the boundary conditions.</p>
+<dl class="titleblock"><div><dt>Role</dt><dd>Full design and implementation (individual project)</dd></div><div><dt>Tools</dt><dd>Ansys Mechanical, Ansys Workbench</dd></div><div><dt>Analysis</dt><dd>Coupled electro-thermal transient</dd></div><div><dt>Status</dt><dd>Model built; did not match bench results</dd></div></dl>
 <figure class="fig-hero"><img src="../img/fuse_pack_render.jpg" alt="Fusible link layout in a custom cylindrical-cell pack" loading="lazy"><figcaption>Fusible link layout in a custom cylindrical-cell pack</figcaption></figure>
 
 <div class="prose">
@@ -41,20 +42,29 @@
 </div>
 
 <div class="prose">
-<h2>Results</h2>
+<h2>What the model predicts</h2>
 <p>At a 50&nbsp;A fault current, the neck of the link reaches 1560&nbsp;&deg;C by 10.5&nbsp;s, past nickel's melting point of about 1455&nbsp;&deg;C. The temperature curve steepens as it climbs, which is the resistivity feedback described above.</p>
 
-<h2>Next steps</h2>
-<p>The current model treats the strip in isolation, which makes it a conservative baseline. Planned extensions:</p>
+<h2>Where it fell apart</h2>
+<p>The model runs and gives a clean, physically sensible curve. It just did not predict what real links did on the bench. I went back and forth between the simulation and bench tests and never got the two to agree.</p>
+<p>The reason is boundary conditions. A fusible link is a very small piece of metal, so its temperature is set less by the strip itself than by where its heat can go:</p>
 <ul>
-<li>Model conduction into the connected cells, which act as heat sinks and would raise the true fusing current.</li>
-<li>Simulate dynamic current profiles instead of a fixed current, to reflect real fault and load conditions.</li>
-<li>Model more complex strip geometries beyond the simplified shapes used here.</li>
+<li>Conduction out of the ends, into the spot welds and the cells or fixtures behind them.</li>
+<li>Convection and radiation off the surface of the strip.</li>
+<li>Contact resistance at the connections, which adds heat the model does not generate.</li>
 </ul>
+<p>None of these are properties of the nickel, and all of them have to be assumed. Changing any one by a plausible amount moved the predicted fusing point more than changing the link geometry did, so the result mostly reflected my assumptions and not the part.</p>
+
+<h2>Takeaway</h2>
+<p>Modelling a fusible link is much harder than the simple setup suggests. The coupled physics is the easy part; the hard part is knowing the thermal environment well enough for the answer to mean anything. I would not trust it for an absolute fusing current; that number has to come from testing the link in the pack it will actually sit in.</p>
+<p>The model was still useful, because it showed how the link fails. Nickel's resistance rises with temperature, so at a fixed current a hotter strip dissipates more power, which heats it further. That resistive runaway is why the temperature curve steepens toward the end instead of levelling off, and it holds whatever the boundary conditions are. I would also still use a model like this to compare one geometry against another.</p>
+<p>It could also work as a check in cases too complicated to reason through by hand. In a parallel group where the strip geometry is not straightforward, fault current splits unevenly between paths, and it is not obvious which section heats first. A model like this could show whether the intended link is the part that fuses, even if the exact current and time are off.</p>
 </div>
 
 <nav class="next"><a href="../index.html#projects">All projects</a><a href="pocketsens.html">Next: PocketSens Portable Sensor Suite</a></nav>
 </main>
-<footer><div class="wrap">Hazel Chen &middot; University of Virginia &middot; <a href="mailto:znp3rx@virginia.edu">znp3rx@virginia.edu</a></div></footer>
+<footer><div class="wrap">
+<p class="foot-buddy"><svg class="buddy" viewBox="0 0 150 150" aria-hidden="true"><path class="b-line b-body" d="M62 24 q13 -5 26 0 l0 8 l-26 0 z"/><path class="b-line b-body" d="M46 36 q29 -9 58 0 q3 44 0 86 q-29 9 -58 0 q-3 -42 0 -86 z"/><path class="b-line" d="M46 50 q29 8 58 0"/><rect class="b-band" x="48" y="100" width="54" height="14" rx="3"/><path class="b-line" d="M47 100 q28 6 56 0 M47 114 q28 6 56 0"/><circle class="b-ink b-eye" cx="64" cy="74" r="4.5"/><circle class="b-ink b-eye" cx="86" cy="74" r="4.5"/><path class="b-line" d="M68 84 q7 7 14 0"/><ellipse class="b-blush" cx="57" cy="85" rx="5" ry="3"/><ellipse class="b-blush" cx="93" cy="85" rx="5" ry="3"/><path class="b-line" d="M45 78 q-14 2 -16 -12"/><path class="b-line b-wave" d="M105 78 q14 -4 14 -18"/><path class="b-line" d="M62 126 l-2 12 M88 126 l2 12"/><path class="b-line b-spark" d="M118 46 l6 -8 M124 52 l10 -3 M112 42 l1 -10"/></svg> thanks for scrolling all the way down!</p>
+Hazel Chen &middot; University of Virginia &middot; <a href="mailto:znp3rx@virginia.edu">znp3rx@virginia.edu</a></div></footer>
 </body>
 </html>

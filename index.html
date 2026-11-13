@@ -5,6 +5,7 @@
 <meta name="viewport" content="width=device-width, initial-scale=1">
 <title>Hazel Chen | Engineering Portfolio</title>
 <meta name="description" content="Projects in EV battery systems, PCB design, and mechanical design by Hazel Chen, UVA engineering student.">
+<link rel="icon" type="image/svg+xml" href="img/cell-buddy.svg">
 <link rel="stylesheet" href="style.css">
 </head>
 <body>
@@ -22,7 +23,7 @@
 
 <section class="hero"><div class="hero-grid">
 <div>
-<h1>Hazel Chen</h1>
+<h1>Hazel Chen<svg class="buddy" viewBox="0 0 150 150" aria-hidden="true"><path class="b-line b-body" d="M62 24 q13 -5 26 0 l0 8 l-26 0 z"/><path class="b-line b-body" d="M46 36 q29 -9 58 0 q3 44 0 86 q-29 9 -58 0 q-3 -42 0 -86 z"/><path class="b-line" d="M46 50 q29 8 58 0"/><rect class="b-band" x="48" y="100" width="54" height="14" rx="3"/><path class="b-line" d="M47 100 q28 6 56 0 M47 114 q28 6 56 0"/><circle class="b-ink b-eye" cx="64" cy="74" r="4.5"/><circle class="b-ink b-eye" cx="86" cy="74" r="4.5"/><path class="b-line" d="M68 84 q7 7 14 0"/><ellipse class="b-blush" cx="57" cy="85" rx="5" ry="3"/><ellipse class="b-blush" cx="93" cy="85" rx="5" ry="3"/><path class="b-line" d="M45 78 q-14 2 -16 -12"/><path class="b-line b-wave" d="M105 78 q14 -4 14 -18"/><path class="b-line" d="M62 126 l-2 12 M88 126 l2 12"/><path class="b-line b-spark" d="M118 46 l6 -8 M124 52 l10 -3 M112 42 l1 -10"/></svg></h1>
 <p class="intro">Third-year mechanical engineering student at the University of Virginia, minoring in electrical engineering. I focus on developing lithium-ion battery systems and electric vehicle components.</p>
 <p class="bio">I lead the electrical and tractive battery subteam on the UVA Formula SAE EV team, where I work on the tractive battery and the high-voltage electronics around it. On my own time I build boards and devices, from a film-scanning light source to a pocket sensor kit. I like taking a project all the way from schematic and CAD to a working, tested part.</p>
 </div>
@@ -36,65 +37,65 @@
 <ul class="index">
 
 <li><a href="projects/tractive-battery.html">
-  <img class="thumb" src="img/tb_enclosure_fab.jpg" alt="" loading="lazy">
+  <img class="thumb" style="object-position: 50% 35%" src="img/thumbs/tb_enclosure_fab-400.jpg" srcset="img/thumbs/tb_enclosure_fab-400.jpg 400w, img/thumbs/tb_enclosure_fab-800.jpg 800w" sizes="(max-width: 760px) calc(100vw - 40px), 200px" alt="" loading="lazy">
   <div>
     <h3>Tractive Battery</h3>
     <p>128S pouch-cell battery pack for our 2026-27 FSAE EV season.</p>
-    <div class="tools">Autodesk Fusion</div>
-  </div>
-</a></li>
-
-<li><a href="projects/hvc.html">
-  <img class="thumb" src="img/hvc_prototype.jpg" alt="" loading="lazy">
-  <div>
-    <h3>High Voltage Controller (HVC)</h3>
-    <p>One board for everything between the tractive battery and the car: precharge, contactors, isoSPI, and safety latches.</p>
-    <div class="tools">Altium Designer</div>
-  </div>
-</a></li>
-
-<li><a href="projects/segment-bms.html">
-  <img class="thumb" src="img/Segment_MB_3drender.png" alt="" loading="lazy">
-  <div>
-    <h3>Segment BMS Rev 2</h3>
-    <p>Two-board cell monitoring stack for each 16-cell segment. I redesigned it for Rev 2, cutting the cell tap board from 6 layers to 2.</p>
-    <div class="tools">Altium Designer</div>
-  </div>
-</a></li>
-
-<li><a href="projects/hv-indicator.html">
-  <img class="thumb" src="img/hvi_v1_flyback.jpg" alt="" loading="lazy">
-  <div>
-    <h3>High Voltage Indicator Light</h3>
-    <p>Tractive-powered isolated supply driving a low-voltage panel-mount light whenever the tractive system is energized.</p>
-    <div class="tools">Altium Designer</div>
-  </div>
-</a></li>
-
-<li><a href="projects/benchtop-pdb.html">
-  <img class="thumb" src="img/pdb_assembled.jpg" alt="" loading="lazy">
-  <div>
-    <h3>Benchtop Power Distribution Board</h3>
-    <p>Switched, fused, and current-sensed 5 V, 3.3 V, and input rails for bench-testing custom PCBs.</p>
-    <div class="tools">Altium Designer</div>
+    <div class="tools"><span class="pill">Autodesk Fusion</span></div>
   </div>
 </a></li>
 
 <li><a href="projects/battery-thermal-model.html">
-  <img class="thumb" src="img/thermal_temp_plot.jpg" alt="" loading="lazy">
+  <img class="thumb" src="img/thumbs/thermal_thumb-400.jpg" srcset="img/thumbs/thermal_thumb-400.jpg 400w, img/thumbs/thermal_thumb-800.jpg 800w" sizes="(max-width: 760px) calc(100vw - 40px), 200px" alt="" loading="lazy">
   <div>
     <h3>Tractive Battery Thermal Model</h3>
     <p>MATLAB model predicting cell temperature and state of charge over a full FSAE endurance run.</p>
-    <div class="tools">MATLAB</div>
+    <div class="tools"><span class="pill">MATLAB</span></div>
+  </div>
+</a></li>
+
+<li><a href="projects/hvc.html">
+  <img class="thumb" src="img/thumbs/hvc_prototype-400.jpg" srcset="img/thumbs/hvc_prototype-400.jpg 400w, img/thumbs/hvc_prototype-800.jpg 800w" sizes="(max-width: 760px) calc(100vw - 40px), 200px" alt="" loading="lazy">
+  <div>
+    <h3>High Voltage Controller (HVC)</h3>
+    <p>One board for everything between the tractive battery and the car: precharge, contactors, isoSPI, and safety latches.</p>
+    <div class="tools"><span class="pill">Altium Designer</span></div>
+  </div>
+</a></li>
+
+<li><a href="projects/segment-bms.html">
+  <img class="thumb fit" src="img/thumbs/Segment_MB_3drender-400.jpg" srcset="img/thumbs/Segment_MB_3drender-400.jpg 400w, img/thumbs/Segment_MB_3drender-800.jpg 800w" sizes="(max-width: 760px) calc(100vw - 40px), 200px" alt="" loading="lazy">
+  <div>
+    <h3>Segment BMS Rev 2</h3>
+    <p>Two-board cell monitoring stack for each 16-cell segment. I redesigned it for Rev 2, cutting the cell tap board from 6 layers to 2.</p>
+    <div class="tools"><span class="pill">Altium Designer</span></div>
+  </div>
+</a></li>
+
+<li><a href="projects/hv-indicator.html">
+  <img class="thumb" src="img/thumbs/hvi_v1_flyback-400.jpg" srcset="img/thumbs/hvi_v1_flyback-400.jpg 400w, img/thumbs/hvi_v1_flyback-800.jpg 800w" sizes="(max-width: 760px) calc(100vw - 40px), 200px" alt="" loading="lazy">
+  <div>
+    <h3>High Voltage Indicator Light</h3>
+    <p>Tractive-powered isolated supply driving a low-voltage panel-mount light whenever the tractive system is energized.</p>
+    <div class="tools"><span class="pill">Altium Designer</span></div>
+  </div>
+</a></li>
+
+<li><a href="projects/benchtop-pdb.html">
+  <img class="thumb" style="object-position: 50% 15%" src="img/thumbs/pdb_assembled-400.jpg" srcset="img/thumbs/pdb_assembled-400.jpg 400w, img/thumbs/pdb_assembled-588.jpg 588w" sizes="(max-width: 760px) calc(100vw - 40px), 200px" alt="" loading="lazy">
+  <div>
+    <h3>Benchtop Power Distribution Board</h3>
+    <p>Switched, fused, and current-sensed 5 V, 3.3 V, and input rails for bench-testing custom PCBs.</p>
+    <div class="tools"><span class="pill">Altium Designer</span></div>
   </div>
 </a></li>
 
 <li><a href="projects/fusible-link-simulation.html">
-  <img class="thumb" src="img/fuse_ansys_contour.jpg" alt="" loading="lazy">
+  <img class="thumb fit" src="img/thumbs/fuse_ansys_contour-400.jpg" srcset="img/thumbs/fuse_ansys_contour-400.jpg 400w, img/thumbs/fuse_ansys_contour-579.jpg 579w" sizes="(max-width: 760px) calc(100vw - 40px), 200px" alt="" loading="lazy">
   <div>
     <h3>Fusible Link Simulation</h3>
     <p>Coupled electro-thermal Ansys model of nickel-strip fusible links for a cylindrical-cell pack.</p>
-    <div class="tools">Ansys Mechanical, Workbench</div>
+    <div class="tools"><span class="pill">Ansys Mechanical</span><span class="pill">Workbench</span></div>
   </div>
 </a></li>
 
@@ -107,29 +108,29 @@
 <ul class="index">
 
 <li><a href="projects/pocketsens.html">
-  <img class="thumb" src="img/pocketsens_pcb_photo.jpg" alt="" loading="lazy">
+  <img class="thumb" style="object-position: 50% 15%" src="img/thumbs/pocketsens_pcb_photo-400.jpg" srcset="img/thumbs/pocketsens_pcb_photo-400.jpg 400w, img/thumbs/pocketsens_pcb_photo-602.jpg 602w" sizes="(max-width: 760px) calc(100vw - 40px), 200px" alt="" loading="lazy">
   <div>
     <h3>PocketSens Portable Sensor Suite</h3>
     <p>Handheld board measuring pressure, gas, humidity, IR temperature, and lightning, on a SAMD21 with LiPo charging.</p>
-    <div class="tools">KiCad, Arduino IDE</div>
+    <div class="tools"><span class="pill">KiCad</span><span class="pill">Arduino IDE</span></div>
   </div>
 </a></li>
 
 <li><a href="projects/lightcore.html">
-  <img class="thumb" src="img/lightcore_assembled.jpg" alt="" loading="lazy">
+  <img class="thumb" src="img/thumbs/lightcore_assembled-400.jpg" srcset="img/thumbs/lightcore_assembled-400.jpg 400w, img/thumbs/lightcore_assembled-655.jpg 655w" sizes="(max-width: 760px) calc(100vw - 40px), 200px" alt="" loading="lazy">
   <div>
     <h3>Future Frame LightCore</h3>
     <p>Five-channel RGB, white, and IR light source for film scanning, with its own enclosure and thermal design.</p>
-    <div class="tools">KiCad, Fusion, CircuitPython</div>
+    <div class="tools"><span class="pill">KiCad</span><span class="pill">Fusion</span><span class="pill">CircuitPython</span></div>
   </div>
 </a></li>
 
 <li><a href="projects/hybrid-viewfinder.html">
-  <img class="thumb" src="img/viewfinder_photo.jpg" alt="" loading="lazy">
+  <img class="thumb" style="object-position: 50% 22%" src="img/thumbs/viewfinder_photo-400.jpg" srcset="img/thumbs/viewfinder_photo-400.jpg 400w, img/thumbs/viewfinder_photo-434.jpg 434w" sizes="(max-width: 760px) calc(100vw - 40px), 200px" alt="" loading="lazy">
   <div>
     <h3>Future Frame Hybrid Viewfinder</h3>
     <p>Optical viewfinder with an infinity-focused display overlay, using CNC-machined acrylic lenses.</p>
-    <div class="tools">Autodesk Fusion (CAD and CAM)</div>
+    <div class="tools"><span class="pill">Autodesk Fusion (CAD and CAM)</span></div>
   </div>
 </a></li>
 
@@ -224,6 +225,8 @@
 </div>
 </section>
 </main>
-<footer><div class="wrap">Hazel Chen &middot; University of Virginia &middot; <a href="mailto:znp3rx@virginia.edu">znp3rx@virginia.edu</a></div></footer>
+<footer><div class="wrap">
+<p class="foot-buddy"><svg class="buddy" viewBox="0 0 150 150" aria-hidden="true"><path class="b-line b-body" d="M62 24 q13 -5 26 0 l0 8 l-26 0 z"/><path class="b-line b-body" d="M46 36 q29 -9 58 0 q3 44 0 86 q-29 9 -58 0 q-3 -42 0 -86 z"/><path class="b-line" d="M46 50 q29 8 58 0"/><rect class="b-band" x="48" y="100" width="54" height="14" rx="3"/><path class="b-line" d="M47 100 q28 6 56 0 M47 114 q28 6 56 0"/><circle class="b-ink b-eye" cx="64" cy="74" r="4.5"/><circle class="b-ink b-eye" cx="86" cy="74" r="4.5"/><path class="b-line" d="M68 84 q7 7 14 0"/><ellipse class="b-blush" cx="57" cy="85" rx="5" ry="3"/><ellipse class="b-blush" cx="93" cy="85" rx="5" ry="3"/><path class="b-line" d="M45 78 q-14 2 -16 -12"/><path class="b-line b-wave" d="M105 78 q14 -4 14 -18"/><path class="b-line" d="M62 126 l-2 12 M88 126 l2 12"/><path class="b-line b-spark" d="M118 46 l6 -8 M124 52 l10 -3 M112 42 l1 -10"/></svg> thanks for scrolling all the way down!</p>
+Hazel Chen &middot; University of Virginia &middot; <a href="mailto:znp3rx@virginia.edu">znp3rx@virginia.edu</a></div></footer>
 </body>
 </html>

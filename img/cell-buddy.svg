@@ -1,0 +1,12 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="20 14 110 130">
+<style>
+.l{fill:none;stroke:#17202a;stroke-width:7;stroke-linecap:round;stroke-linejoin:round}
+.b{fill:#fff}.i{fill:#17202a}
+@media (prefers-color-scheme: dark){.l{stroke:#e6ebef}.b{fill:#1a2229}.i{fill:#e6ebef}}
+</style>
+<path class="l b" d="M62 24 q13 -5 26 0 l0 8 l-26 0 z"/>
+<path class="l b" d="M46 36 q29 -9 58 0 q3 44 0 86 q-29 9 -58 0 q-3 -42 0 -86 z"/>
+<rect fill="#e8590c" x="49" y="100" width="52" height="14" rx="3"/>
+<circle class="i" cx="64" cy="74" r="6.5"/><circle class="i" cx="86" cy="74" r="6.5"/>
+<path class="l" d="M67 87 q8 7 16 0"/>
+</svg>
