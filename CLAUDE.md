@@ -8,6 +8,7 @@ Notes for whoever edits the site next (Hazel, or Claude in a later session). Pla
 |---|---|
 | `index.html` | Home page: hero, project list (two groups), skills |
 | `projects/*.html` | One page per project; each ends with a "Next:" link |
+| `projects/bringup-notes.html` | Bring-up and debugging stories (started 2026-11-13). Not in the home project list or the "Next:" chain yet; linked from the HVC page and the test-equipment skill card. Diagrams use the `.chain` / `.c-*` styles |
 | `style.css` | All styles. Colour tokens at the top; feature blocks near the end |
 | `img/` | Full-size images used on project pages |
 | `img/thumbs/` | Resized, trimmed, graded copies used only by the home page list |
@@ -106,4 +107,5 @@ Framing is set per thumbnail in `index.html`: `style="object-position: ..."` shi
 - **Thumbnail ideas not done:** lit-up/powered-on shots (HV Indicator, LightCore, PocketSens), Segment BMS swapped to the chip close-up, fusible link cropped to just the link, thermal thumbnail redrawn in site colours.
 - `img/MatlabThermalPlot.png` is no longer used anywhere.
 - The thermal plot annotation sits on `img/thermal_temp_plot.jpg`; when the plot is re-exported (first item above), re-check the arrow targets in `tools/make-notes.py`.
+- **Bring-up notes page is a first draft** with one case (HVC optocoupler), written from Hazel's short description. Two `TODO Hazel` comments in the HTML mark what to confirm. Planned: a precharge low-voltage test story, a "small catches" list (solder issues, misplaced parts), bench photos, then a home page card.
 - Nothing from the 2026-11-12/13 sessions has been committed or pushed yet.

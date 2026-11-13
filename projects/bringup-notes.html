@@ -1,0 +1,60 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Bring-up Notes | Hazel Chen</title>
+<meta name="description" content="How I bring up and debug boards on the bench: what I saw, what I measured, and what fixed it.">
+<link rel="icon" type="image/svg+xml" href="../img/cell-buddy.svg">
+<link rel="stylesheet" href="../style.css">
+</head>
+<body>
+<header class="topbar"><div class="wrap">
+  <a class="name" href="../index.html">Hazel Chen</a>
+  <nav>
+    <a href="../index.html#projects">Projects</a>
+    <a href="../resume.pdf">Resume</a>
+    <a href="mailto:znp3rx@virginia.edu">Email</a>
+    <a href="https://www.linkedin.com/in/hazelchens/">LinkedIn</a>
+    <a href="https://github.com/Hazel-H-Chen">GitHub</a>
+  </nav>
+</div></header>
+<main class="wrap">
+<a class="back" href="../index.html#projects">&larr; All projects</a>
+<div class="proj-head"><h1>Bring-up Notes</h1></div>
+
+<p class="lede">The whole process from getting from an assembled board to a working one.</p>
+
+<h2>How I troubleshoot</h2>
+<div class="blocks">
+<section><h3>1. Isolate</h3>
+<p>Cut the problem down to the smallest piece of the board that still misbehaves, and give it an input I control: a current-limited supply, or a known voltage injected in place of the real source.</p></section>
+<section><h3>2. Trace</h3>
+<p>Follow the signal from that input through the circuit one stage at a time, checking each measurement against what the schematic says should be there.</p></section>
+<section><h3>3. Track down</h3>
+<p>The fault is at the first stage where the measurement and the expectation disagree. From there I work out which part is responsible, sometimes by removing suspects one at a time, and replace it.</p></section>
+</div>
+
+<div class="prose">
+<h2>HVC Precharge Issue</h2>
+<p class="case-meta">Board: <a href="hvc.html">High Voltage Controller</a> prototype</p>
+<!-- TODO Hazel: confirm the symptom wording, and what exactly was not switching (precharge relay? main contactor?) -->
+<p><b>The issue.</b> On the first prototype, precharge wasn't coming on when we expected it to.</p>
+<p><b>Keeping it low voltage.</b> The real circuit works against a 556&nbsp;V pack, which is not something to have live on the bench while hunting a fault. So we injected a voltage across the precharge resistors from a bench supply to simulate a precharge, which let us do all of the probing at low voltage.</p>
+<p><b>Following the signal.</b> With a known voltage going in, we traced it through the analog comparator circuit one stage at a time. The voltage at the comparator's input was what we expected. We then probed the comparator's output and the optocoupler after it, and found the optocoupler was not passing the right signal along.</p>
+<p><b>The fix.</b> The optocoupler was defective. We replaced it.</p>
+<!-- TODO Hazel: one line on the result after the swap (did precharge then switch correctly? is this the same setup that gave the 93% figure?) -->
+</div>
+<figure class="chain"><svg viewBox="0 0 960 210" role="img" aria-label="Signal chain from left to right: bench supply, precharge resistors, comparator, optocoupler. Handwritten notes mark the comparator input as expected, the comparator output as good, and the optocoupler output as wrong."><path class="c-wire" d="M210 110H260M450 110H500M690 110H740M930 110H956"/><rect class="c-box" x="20" y="78" width="190" height="64" rx="8"/><rect class="c-box" x="260" y="78" width="190" height="64" rx="8"/><rect class="c-box" x="500" y="78" width="190" height="64" rx="8"/><rect class="c-box c-bad" x="740" y="78" width="190" height="64" rx="8"/><text class="c-label" x="115" y="116">bench supply</text><text class="c-label" x="355" y="106">precharge</text><text class="c-label" x="355" y="128">resistors</text><text class="c-label" x="595" y="116">comparator</text><text class="c-label" x="835" y="116">optocoupler</text><text class="n-text" x="475" y="36" text-anchor="middle">input: as expected</text><path class="n-arrow" d="M475 46 q-6 22 0 44 m-9 -15 l9 15 l8 -16"/><text class="n-text" x="640" y="190">output: good</text><path class="n-arrow" d="M700 164 q14 -18 14 -40 m-10 14 l10 -14 l7 16"/><text class="n-text" x="940" y="36" text-anchor="end">wrong signal out!</text><path class="n-arrow" d="M930 46 q14 20 12 48 m-9 -15 l9 15 l8 -16"/><path class="n-arrow" d="M20 178 l8 9 l16 -20"/><text class="n-text n-small" x="52" y="188">low voltage the whole time</text></svg><figcaption>Where each measurement landed</figcaption></figure>
+
+<div class="prose">
+<p><b>What I took from it.</b> Start from an input you control and check each stage in order. The fault is at the first stage whose output is wrong, and everything before it is cleared along the way.</p>
+</div>
+
+<nav class="next"><a href="../index.html#projects">All projects</a><a href="hvc.html">The board: High Voltage Controller</a></nav>
+</main>
+<footer><div class="wrap">
+<p class="foot-buddy"><svg class="buddy" viewBox="0 0 150 150" aria-hidden="true"><path class="b-line b-body" d="M62 24 q13 -5 26 0 l0 8 l-26 0 z"/><path class="b-line b-body" d="M46 36 q29 -9 58 0 q3 44 0 86 q-29 9 -58 0 q-3 -42 0 -86 z"/><path class="b-line" d="M46 50 q29 8 58 0"/><rect class="b-band" x="48" y="100" width="54" height="14" rx="3"/><path class="b-line" d="M47 100 q28 6 56 0 M47 114 q28 6 56 0"/><circle class="b-ink b-eye" cx="64" cy="74" r="4.5"/><circle class="b-ink b-eye" cx="86" cy="74" r="4.5"/><path class="b-line" d="M68 84 q7 7 14 0"/><ellipse class="b-blush" cx="57" cy="85" rx="5" ry="3"/><ellipse class="b-blush" cx="93" cy="85" rx="5" ry="3"/><path class="b-line" d="M45 78 q-14 2 -16 -12"/><path class="b-line b-wave" d="M105 78 q14 -4 14 -18"/><path class="b-line" d="M62 126 l-2 12 M88 126 l2 12"/><path class="b-line b-spark" d="M118 46 l6 -8 M124 52 l10 -3 M112 42 l1 -10"/></svg> thanks for scrolling all the way down!</p>
+Hazel Chen &middot; University of Virginia &middot; <a href="mailto:znp3rx@virginia.edu">znp3rx@virginia.edu</a></div></footer>
+</body>
+</html>
